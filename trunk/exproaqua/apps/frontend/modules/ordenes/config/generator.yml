@@ -1,0 +1,45 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           OrdPro
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ord_pro
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    layout:                stacked
+
+    config:
+      actions: ~
+      fields:
+        numord:  { label: "Nro. Orden" }
+        desord:  { label: "Descripción" }
+        fecord:  { label: "Fecha" }
+        fecanu:  { label: "Fecha" }
+        created_at:  { label: "Creación" }
+        anulada: { attributes: { disabled: true } }
+        new_materia_prima: { label: "Materia Prima" }
+        new_productos: { label: "Productos" }
+        list_materia_prima: { label: "Detalle Materia Prima" }
+        list_productos: { label: "Detalle Productos" }
+      list:
+        title: Ordenes de Producción
+        display: [=numord, =desord, fecord, anulada, a_producir]
+      filter:
+        fields:
+          anulada: { attributes: { disabled: false } }
+        display: [numord, desord, fecord, anulada]
+      form:    ~
+      edit:
+        title: Editando Orden de Producción
+        display: [numord, desord, anulada, _list_productos, _list_materia_prima]
+      new:
+        title: Nueva Orden de Producción
+        display:
+          Orden: [numord, desord ]
+          Selección Producto: [_new_productos ]
+          Productos Requeridos: [_list_productos ]
+          Artículos Requeridos: [_list_materia_prima ]

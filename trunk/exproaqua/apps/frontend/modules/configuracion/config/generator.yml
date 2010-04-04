@@ -1,0 +1,34 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           AlmConf
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          alm_conf
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        almmatpri: { label: "Materia Prima" }
+        almpropro: { label: "Materia Proceso" }
+        almproter: { label: "Producto Terminado" }
+      list:    ~
+      filter:  ~
+      form:    ~
+      edit:
+        title: Configuración General
+        display:
+          Almacenes: [almmatpri, almpropro, almproter]
+        actions:
+          _save: ~
+      new:
+        title: Configuración General
+        display:
+          Almacenes: [almmatpri, almpropro, almproter]
+        actions:
+          _save: ~

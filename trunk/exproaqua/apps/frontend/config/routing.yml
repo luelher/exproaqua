@@ -1,0 +1,71 @@
+ord_pro:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                OrdPro
+    module:               ordenes
+    prefix_path:          /ordenes
+    column:               id
+    with_wildcard_routes: true
+
+alm_conf:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AlmConf
+    module:               configuracion
+    prefix_path:          /configuracion
+    column:               id
+    with_wildcard_routes: true
+
+articulo:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Articulo
+    module:               articulos
+    prefix_path:          /articulos
+    column:               codigo
+    with_wildcard_routes: true
+
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: home, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+  #sfGuardGroup, sfGuardPermission, sfGuardUser
+sf_guard_group:
+  url:   /groups
+  param: { module: sfGuardGroup, action: index }
+
+sf_guard_permission:
+  url:   /permissions
+  param: { module: sfGuardPermission, action: index }
+
+sf_guard_user:
+  url:   /users
+  param: { module: sfGuardUser, action: index }
+
+
+
