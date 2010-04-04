@@ -1,0 +1,121 @@
+connection: premium
+
+AlmConf:
+  tableName: almconf
+  actAs: [Timestampable]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    almmatpri:
+      type: string(2)
+      notnull: true
+    almpropro:
+      type: string(2)
+      notnull: true
+    almproter:
+      type: string(2)
+      notnull: true
+  relations:
+    Almacene_1:
+      class: Almacene
+      local: almmatpri
+      foreign: codigo
+    Almacene_2:
+      class: Almacene
+      local: almpropro
+      foreign: codigo
+    Almacene_3:
+      class: Almacene
+      local: almproter
+      foreign: codigo
+
+OrdPro:
+  tableName: ordpro
+  actAs: [Timestampable]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    numord:
+      type: integer(4)
+      notnull: true
+      unique: true
+    desord:
+      type: string(100)
+      notnull: true
+    fecord:
+      type: timestamp
+      notnull: true
+    anulada:
+      type: boolean
+      default: 0
+    fecanu:
+      type: timestamp
+      notnull: false
+  indexes:
+    numord_idx:
+      fields: [numord]
+    anulada_idx:
+      fields: [anulada]
+  relations:
+    productos:
+      class: OrdProPro
+      local: id
+      foreign: ordpro_id
+      type: many
+    materia_prima:
+      class: OrdProMatPri
+      local: id
+      foreign: ordpro_id
+      type: many
+
+OrdProPro:
+  tableName: ordpropro
+  actAs: [Timestampable]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    ordpro_id:
+      type: integer(4)
+      notnull: true
+    artcomp:
+      type: string(25)
+      notnull: true
+    cantidad:
+      type: integer(4)
+      notnull: true
+  relations:
+    ArticuloCompuesto:
+      class: Articulo
+      local: artcomp
+      foreign: codigo
+      type: many
+
+OrdProMatPri:
+  tableName: ordpromatpri
+  actAs: [Timestampable]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    ordpro_id:
+      type: integer(4)
+      notnull: true
+    artcomp:
+      type: string(25)
+      notnull: true
+    cantidad:
+      type: integer(4)
+      notnull: true
+  relations:
+    MateriaPrima:
+      class: Articulo
+      local: artcomp
+      foreign: codigo
+      type: many

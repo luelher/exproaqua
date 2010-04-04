@@ -1,0 +1,207 @@
+<?php
+
+/**
+ * Agencias filter form base class.
+ *
+ * @package    exproaqua
+ * @subpackage filter
+ * @author     Luis Hernández
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ */
+abstract class BaseAgenciasFormFilter extends BaseFormFilterDoctrine
+{
+  public function setup()
+  {
+    $this->setWidgets(array(
+      'nombre'            => new sfWidgetFormFilterInput(),
+      'direccion'         => new sfWidgetFormFilterInput(),
+      'telefonos'         => new sfWidgetFormFilterInput(),
+      'represent'         => new sfWidgetFormFilterInput(),
+      'email'             => new sfWidgetFormFilterInput(),
+      'cfactura1'         => new sfWidgetFormFilterInput(),
+      'cfactura2'         => new sfWidgetFormFilterInput(),
+      'seriefac_b'        => new sfWidgetFormFilterInput(),
+      'seriefac_c'        => new sfWidgetFormFilterInput(),
+      'seriefac_d'        => new sfWidgetFormFilterInput(),
+      'seriefac_e'        => new sfWidgetFormFilterInput(),
+      'cnotaent'          => new sfWidgetFormFilterInput(),
+      'cpresup'           => new sfWidgetFormFilterInput(),
+      'pnotacred'         => new sfWidgetFormFilterInput(),
+      'pretencion'        => new sfWidgetFormFilterInput(),
+      'pretencion2'       => new sfWidgetFormFilterInput(),
+      'cconcilia'         => new sfWidgetFormFilterInput(),
+      'cordencomp'        => new sfWidgetFormFilterInput(),
+      'cpedidov'          => new sfWidgetFormFilterInput(),
+      'pedidocom'         => new sfWidgetFormFilterInput(),
+      'cdevolucic'        => new sfWidgetFormFilterInput(),
+      'cnotacred'         => new sfWidgetFormFilterInput(),
+      'cnotacred2'        => new sfWidgetFormFilterInput(),
+      'cretencli'         => new sfWidgetFormFilterInput(),
+      'cretencli2'        => new sfWidgetFormFilterInput(),
+      'ccompegre'         => new sfWidgetFormFilterInput(),
+      'pnotadeb'          => new sfWidgetFormFilterInput(),
+      'cexisten'          => new sfWidgetFormFilterInput(),
+      'ctransac'          => new sfWidgetFormFilterInput(),
+      'creccob'           => new sfWidgetFormFilterInput(),
+      'cajuste'           => new sfWidgetFormFilterInput(),
+      'cordprod'          => new sfWidgetFormFilterInput(),
+      'csolicitud'        => new sfWidgetFormFilterInput(),
+      'cplanpago'         => new sfWidgetFormFilterInput(),
+      'financiar'         => new sfWidgetFormFilterInput(),
+      'cplancobro'        => new sfWidgetFormFilterInput(),
+      'crecibo'           => new sfWidgetFormFilterInput(),
+      'crecibocob'        => new sfWidgetFormFilterInput(),
+      'crelacomi'         => new sfWidgetFormFilterInput(),
+      'cdevoluci'         => new sfWidgetFormFilterInput(),
+      'cnotadeb'          => new sfWidgetFormFilterInput(),
+      'cnotadeb2'         => new sfWidgetFormFilterInput(),
+      'conschq'           => new sfWidgetFormFilterInput(),
+      'formatofac1'       => new sfWidgetFormFilterInput(),
+      'formatofac2'       => new sfWidgetFormFilterInput(),
+      'formatofacb'       => new sfWidgetFormFilterInput(),
+      'formatofacc'       => new sfWidgetFormFilterInput(),
+      'formatofacd'       => new sfWidgetFormFilterInput(),
+      'formatoface'       => new sfWidgetFormFilterInput(),
+      'formatopre'        => new sfWidgetFormFilterInput(),
+      'formatonot'        => new sfWidgetFormFilterInput(),
+      'pagoadelantado'    => new sfWidgetFormFilterInput(),
+      'despacho'          => new sfWidgetFormFilterInput(),
+      'despacho_delivery' => new sfWidgetFormFilterInput(),
+      'cnrodoc2'          => new sfWidgetFormFilterInput(),
+    ));
+
+    $this->setValidators(array(
+      'nombre'            => new sfValidatorPass(array('required' => false)),
+      'direccion'         => new sfValidatorPass(array('required' => false)),
+      'telefonos'         => new sfValidatorPass(array('required' => false)),
+      'represent'         => new sfValidatorPass(array('required' => false)),
+      'email'             => new sfValidatorPass(array('required' => false)),
+      'cfactura1'         => new sfValidatorPass(array('required' => false)),
+      'cfactura2'         => new sfValidatorPass(array('required' => false)),
+      'seriefac_b'        => new sfValidatorPass(array('required' => false)),
+      'seriefac_c'        => new sfValidatorPass(array('required' => false)),
+      'seriefac_d'        => new sfValidatorPass(array('required' => false)),
+      'seriefac_e'        => new sfValidatorPass(array('required' => false)),
+      'cnotaent'          => new sfValidatorPass(array('required' => false)),
+      'cpresup'           => new sfValidatorPass(array('required' => false)),
+      'pnotacred'         => new sfValidatorPass(array('required' => false)),
+      'pretencion'        => new sfValidatorPass(array('required' => false)),
+      'pretencion2'       => new sfValidatorPass(array('required' => false)),
+      'cconcilia'         => new sfValidatorPass(array('required' => false)),
+      'cordencomp'        => new sfValidatorPass(array('required' => false)),
+      'cpedidov'          => new sfValidatorPass(array('required' => false)),
+      'pedidocom'         => new sfValidatorPass(array('required' => false)),
+      'cdevolucic'        => new sfValidatorPass(array('required' => false)),
+      'cnotacred'         => new sfValidatorPass(array('required' => false)),
+      'cnotacred2'        => new sfValidatorPass(array('required' => false)),
+      'cretencli'         => new sfValidatorPass(array('required' => false)),
+      'cretencli2'        => new sfValidatorPass(array('required' => false)),
+      'ccompegre'         => new sfValidatorPass(array('required' => false)),
+      'pnotadeb'          => new sfValidatorPass(array('required' => false)),
+      'cexisten'          => new sfValidatorPass(array('required' => false)),
+      'ctransac'          => new sfValidatorPass(array('required' => false)),
+      'creccob'           => new sfValidatorPass(array('required' => false)),
+      'cajuste'           => new sfValidatorPass(array('required' => false)),
+      'cordprod'          => new sfValidatorPass(array('required' => false)),
+      'csolicitud'        => new sfValidatorPass(array('required' => false)),
+      'cplanpago'         => new sfValidatorPass(array('required' => false)),
+      'financiar'         => new sfValidatorPass(array('required' => false)),
+      'cplancobro'        => new sfValidatorPass(array('required' => false)),
+      'crecibo'           => new sfValidatorPass(array('required' => false)),
+      'crecibocob'        => new sfValidatorPass(array('required' => false)),
+      'crelacomi'         => new sfValidatorPass(array('required' => false)),
+      'cdevoluci'         => new sfValidatorPass(array('required' => false)),
+      'cnotadeb'          => new sfValidatorPass(array('required' => false)),
+      'cnotadeb2'         => new sfValidatorPass(array('required' => false)),
+      'conschq'           => new sfValidatorPass(array('required' => false)),
+      'formatofac1'       => new sfValidatorPass(array('required' => false)),
+      'formatofac2'       => new sfValidatorPass(array('required' => false)),
+      'formatofacb'       => new sfValidatorPass(array('required' => false)),
+      'formatofacc'       => new sfValidatorPass(array('required' => false)),
+      'formatofacd'       => new sfValidatorPass(array('required' => false)),
+      'formatoface'       => new sfValidatorPass(array('required' => false)),
+      'formatopre'        => new sfValidatorPass(array('required' => false)),
+      'formatonot'        => new sfValidatorPass(array('required' => false)),
+      'pagoadelantado'    => new sfValidatorPass(array('required' => false)),
+      'despacho'          => new sfValidatorPass(array('required' => false)),
+      'despacho_delivery' => new sfValidatorPass(array('required' => false)),
+      'cnrodoc2'          => new sfValidatorPass(array('required' => false)),
+    ));
+
+    $this->widgetSchema->setNameFormat('agencias_filters[%s]');
+
+    $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
+
+    $this->setupInheritance();
+
+    parent::setup();
+  }
+
+  public function getModelName()
+  {
+    return 'Agencias';
+  }
+
+  public function getFields()
+  {
+    return array(
+      'id_empresa'        => 'Text',
+      'agencia'           => 'Text',
+      'nombre'            => 'Text',
+      'direccion'         => 'Text',
+      'telefonos'         => 'Text',
+      'represent'         => 'Text',
+      'email'             => 'Text',
+      'cfactura1'         => 'Text',
+      'cfactura2'         => 'Text',
+      'seriefac_b'        => 'Text',
+      'seriefac_c'        => 'Text',
+      'seriefac_d'        => 'Text',
+      'seriefac_e'        => 'Text',
+      'cnotaent'          => 'Text',
+      'cpresup'           => 'Text',
+      'pnotacred'         => 'Text',
+      'pretencion'        => 'Text',
+      'pretencion2'       => 'Text',
+      'cconcilia'         => 'Text',
+      'cordencomp'        => 'Text',
+      'cpedidov'          => 'Text',
+      'pedidocom'         => 'Text',
+      'cdevolucic'        => 'Text',
+      'cnotacred'         => 'Text',
+      'cnotacred2'        => 'Text',
+      'cretencli'         => 'Text',
+      'cretencli2'        => 'Text',
+      'ccompegre'         => 'Text',
+      'pnotadeb'          => 'Text',
+      'cexisten'          => 'Text',
+      'ctransac'          => 'Text',
+      'creccob'           => 'Text',
+      'cajuste'           => 'Text',
+      'cordprod'          => 'Text',
+      'csolicitud'        => 'Text',
+      'cplanpago'         => 'Text',
+      'financiar'         => 'Text',
+      'cplancobro'        => 'Text',
+      'crecibo'           => 'Text',
+      'crecibocob'        => 'Text',
+      'crelacomi'         => 'Text',
+      'cdevoluci'         => 'Text',
+      'cnotadeb'          => 'Text',
+      'cnotadeb2'         => 'Text',
+      'conschq'           => 'Text',
+      'formatofac1'       => 'Text',
+      'formatofac2'       => 'Text',
+      'formatofacb'       => 'Text',
+      'formatofacc'       => 'Text',
+      'formatofacd'       => 'Text',
+      'formatoface'       => 'Text',
+      'formatopre'        => 'Text',
+      'formatonot'        => 'Text',
+      'pagoadelantado'    => 'Text',
+      'despacho'          => 'Text',
+      'despacho_delivery' => 'Text',
+      'cnrodoc2'          => 'Text',
+    );
+  }
+}
