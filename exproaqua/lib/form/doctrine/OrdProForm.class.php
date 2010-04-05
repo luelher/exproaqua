@@ -26,10 +26,10 @@ class OrdProForm extends BaseOrdProForm
     )));
 
     $this->validatorSchema->setOption('allow_extra_fields', true);
+    $this->validatorSchema->setOption('filter_extra_fields', false);
+
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
-
-
 
   }
 

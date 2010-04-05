@@ -3,29 +3,23 @@ class sfValidatorOrdenesProduccion extends sfValidatorBase
 {
   protected function configure($options = array(), $messages = array())
   {
-    $this->addOption('true_values', array('true', 't', 'yes', 'y', 'on', '1'));
-    $this->addOption('false_values', array('false', 'f', 'no', 'n', 'off', '0'));
-    $this->addOption('null_values', array('null', null));
   }
 
   protected function doClean($value)
   {
-    if (in_array($value, $this->getOption('true_values')))
-    {
-      return true;
+
+    $ordpropro = $value['list_productos'];
+
+    $ordpromatpri = $value['list_materia_prima'];
+
+    if(count($ordpropro)==0 || count($ordpromatpri)==0) throw new sfValidatorError($this, 'Debe Agregar al menos un producto y materia prima', array('value' => $value));
+
+    foreach($ordpromatpri as $matpri){
+      $articulo = Doctrine::getTable('Articulo')->findOneBy('codigo', $matpri['artcomp']);
+      if($articulo->getExistencia()<$matpri['cantidad']) throw new sfValidatorError($this, 'No hay Existencia suficiente para el artículo '.trim($matpri['artcomp']).'(existencia='.$articulo->getExistencia().')', array('value' => $value));
     }
 
-    if (in_array($value, $this->getOption('false_values')))
-    {
-      return false;
-    }
-
-    if (in_array($value, $this->getOption('null_values')))
-    {
-      return null;
-    }
-
-    throw new sfValidatorError($this, 'invalid', array('value' => $value));
+    
   }
 
   public function isEmpty($value)

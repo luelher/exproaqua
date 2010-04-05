@@ -16,11 +16,47 @@ class ordenesActions extends autoOrdenesActions
 
   public function executeProducto(sfWebRequest $request)
   {
-    $form = new OrdProForm();
-    $this->renderLists($request, $form);
+    $ordpro = new OrdPro();
+    $this->renderLists($request, &$ordpro);
   }
 
-  public function renderLists(sfWebRequest $request, OrdProForm &$form)
+  public function renderListsPost(sfWebRequest $request, OrdPro &$obj)
+  {
+    $this->producto = array();
+    $this->error = array();
+    $this->ordpro = $request->getParameter('ord_pro');
+    $this->producto[] = $this->ordpro['new_productos'];
+
+    $ordpropro = $this->ordpro['list_productos'];
+
+    $ordpromatpri = $this->ordpro['list_materia_prima'];
+
+    $this->productos = new Doctrine_Collection('OrdProPro');
+    $this->materia_prima = new Doctrine_Collection('OrdProMatPri');
+
+    foreach($ordpropro as $producto){
+      $ordpropro = new OrdProPro();
+      $ordpropro->setArtcomp($producto['artcomp']);
+      $ordpropro->setCantidad($producto['cantidad']);
+      $this->productos->add($ordpropro);
+    }
+    $obj->productos=$this->productos;
+
+    foreach($ordpromatpri as $matpri){
+      $ordpromatpri = new OrdProMatPri();
+      $ordpromatpri->setCodcomp($matpri['codcomp']);
+      $ordpromatpri->setNomcomp($matpri['nomcomp']);
+      $ordpromatpri->setArtcomp($matpri['artcomp']);
+      $ordpromatpri->setCantidad($matpri['cantidad']);
+
+      $this->materia_prima->add($ordpromatpri);
+    }
+    $obj->materia_prima=$this->materia_prima;
+
+
+  }
+
+  public function renderLists(sfWebRequest $request, OrdPro &$obj)
   {
     $this->producto = array();
     $this->error = array();
@@ -44,7 +80,7 @@ class ordenesActions extends autoOrdenesActions
           $this->producto[] = array('artcomp' => $propro['artcomp'], 'cantidad' => $propro['cantidad']);
         }
       }
-      $form->setObject($form->object->productos=$this->producto);
+      $obj->productos=$this->producto;
     }
 
     foreach($this->producto as $producto){
@@ -72,7 +108,7 @@ class ordenesActions extends autoOrdenesActions
 
               $this->materia_prima->add($ordpromatpri);
             }
-            $form->setObject($form->getObject()->materia_prima=$this->materia_prima);
+            $obj->materia_prima=$this->materia_prima;
 
           }else{
             $this->error[] = 'El Producto Seleccionado no Existe Como Artículo Compuesto';
@@ -82,55 +118,26 @@ class ordenesActions extends autoOrdenesActions
         }
 
       }else{
-        $this->error[] = 'Debe Seleccionar un Producto y la cantidad a producir. La cantidad debe ser entera';
-      }
-
-    }
-  }
-
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
-
-      try {
-        $ord_pro = $form->save();
-      } catch (Doctrine_Validator_Exception $e) {
-
-        $errorStack = $form->getObject()->getErrorStack();
-
-        $message = get_class($form->getObject()) . ' has ' . count($errorStack) . " field" . (count($errorStack) > 1 ?  's' : null) . " with validation errors: ";
-        foreach ($errorStack as $field => $errors) {
-            $message .= "$field (" . implode(", ", $errors) . "), ";
+          $this->error[] = 'Debe Seleccionar un Producto y la cantidad a producir. La cantidad debe ser entera';
         }
-        $message = trim($message, ', ');
-
-        $this->getUser()->setFlash('error', $message);
-        return sfView::SUCCESS;
+        
       }
 
-      $this->dispatcher->notify(new sfEvent($this, 'admin.save_object', array('object' => $ord_pro)));
-
-      if ($request->hasParameter('_save_and_add'))
-      {
-        $this->getUser()->setFlash('notice', $notice.' You can add another one below.');
-
-        $this->redirect('@ord_pro_new');
-      }
-      else
-      {
-        $this->getUser()->setFlash('notice', $notice);
-
-        $this->redirect(array('sf_route' => 'ord_pro_edit', 'sf_subject' => $ord_pro));
-      }
     }
-    else
-    {
-      $this->renderLists($request, &$form);
-      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
-    }
+
+  public function executeCreate(sfWebRequest $request)
+  {
+    $this->form = $this->configuration->getForm();
+    $this->ord_pro = $this->form->getObject();
+
+    $this->processForm($request, $this->form);
+
+    $ordpro = $this->form->getObject();
+    $this->renderListsPost($request, &$ordpro);
+    $this->form->setObject($ordpro);
+
+    $this->setTemplate('new');
   }
+
 
 }
