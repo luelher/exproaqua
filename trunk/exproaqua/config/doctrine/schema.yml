@@ -66,11 +66,13 @@ OrdPro:
       local: id
       foreign: ordpro_id
       type: many
+      onDelete: CASCADE
     materia_prima:
       class: OrdProMatPri
       local: id
       foreign: ordpro_id
       type: many
+      onDelete: CASCADE
 
 OrdProPro:
   tableName: ordpropro
@@ -111,7 +113,7 @@ OrdProMatPri:
       type: string(25)
       notnull: true
     cantidad:
-      type: integer(4)
+      type: float
       notnull: true
   relations:
     MateriaPrima:

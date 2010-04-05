@@ -24,14 +24,16 @@ class OrdProMatPri extends BaseOrdProMatPri
 
   public function getExistencia()
   {
-    $articulo = $this->getMateriaPrima();
-    if($articulo) return $articulo[0]->getExistencia();
+    $articulo = Doctrine::getTable('Articulo')->findOneBy('codigo', $this->artcomp);
+    if($articulo) return $articulo->getExistencia();
     else return '<No Encontrado>';
   }
 
   public function getCodcomp()
   {
-    return $this->codcomp;
+    $articulo = Doctrine::getTable('Articomp')->findOneBy('codigo', $this->artcomp);
+    if($articulo) return $articulo->getCompuesto();
+    else return $this->codcomp;
   }
 
   public function setCodcomp($value)
