@@ -63,9 +63,9 @@ class ordenesActions extends autoOrdenesActions
     $this->ordpro = $request->getParameter('ord_pro');
     $this->producto[] = $this->ordpro['new_productos'];
 
-    $ordpropro = $request->getParameter('list_productos');
+    $ordpropro = isset ($this->ordpro['list_productos']) ? $this->ordpro['list_productos'] : array();
 
-    $ordpromatpri = $request->getParameter('list_materia_prima');
+    $ordpromatpri = isset($this->ordpro['list_materia_prima']) ? $this->ordpro['list_materia_prima'] : array();
 
     $this->productos = new Doctrine_Collection('OrdProPro');
     $this->materia_prima = new Doctrine_Collection('OrdProMatPri');
@@ -80,7 +80,6 @@ class ordenesActions extends autoOrdenesActions
           $this->producto[] = array('artcomp' => $propro['artcomp'], 'cantidad' => $propro['cantidad']);
         }
       }
-      $obj->productos=$this->producto;
     }
 
     foreach($this->producto as $producto){
@@ -108,7 +107,6 @@ class ordenesActions extends autoOrdenesActions
 
               $this->materia_prima->add($ordpromatpri);
             }
-            $obj->materia_prima=$this->materia_prima;
 
           }else{
             $this->error[] = 'El Producto Seleccionado no Existe Como Artículo Compuesto';
@@ -137,6 +135,25 @@ class ordenesActions extends autoOrdenesActions
     $this->form->setObject($ordpro);
 
     $this->setTemplate('new');
+  }
+
+  public function executeDelete(sfWebRequest $request)
+  {
+    $request->checkCSRFProtection();
+
+    $this->dispatcher->notify(new sfEvent($this, 'admin.delete_object', array('object' => $this->getRoute()->getObject())));
+
+    $ord_pro = $this->getRoute()->getObject();
+
+    $ord_pro->getProductos()->delete();
+    $ord_pro->getMateriaPrima()->delete();
+    if ($ord_pro->delete())
+    {
+      // Agregar Proceso de integración con profit
+      $this->getUser()->setFlash('notice', 'The item was deleted successfully.');
+    }
+
+    $this->redirect('@ord_pro');
   }
 
 

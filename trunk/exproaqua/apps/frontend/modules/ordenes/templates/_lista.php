@@ -29,7 +29,8 @@
             <td>
               <ul class="sf_admin_td_actions">
                 <?php if(isset($options) && $options['delete']): ?>
-                  <li class="sf_admin_action_delete"><a onclick="if (confirm('¿Estas Seguro?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'post'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', 'sf_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_csrf_token'); m.setAttribute('value', '37b17b09605d359aea61a9d8d307b09b'); f.appendChild(m);f.submit(); };return false;" href="/frontend_dev.php/ordenes/<?php echo (isset($options) && isset($options['delete']['delete_action'])) ? $options['delete']['delete_action'] : 'action' ?>/<?php echo $obj->getId() ?>">Eliminar</a></li>  </ul>
+                  <!-- if (confirm('¿Estas Seguro?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'post'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', 'sf_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_csrf_token'); m.setAttribute('value', '37b17b09605d359aea61a9d8d307b09b'); f.appendChild(m);f.submit(); };return false; -->
+                  <li class="sf_admin_action_delete"><a onclick="if (confirm('¿Estas Seguro?')) { alert('Por Implementar') };return false;" href="/frontend_dev.php/ordenes/<?php echo (isset($options) && isset($options['delete']['delete_action'])) ? $options['delete']['delete_action'] : 'action' ?>/<?php echo $obj->getId() ?>">Eliminar</a></li>  </ul>
                 <?php endif; ?>
             </td>
           </tr>

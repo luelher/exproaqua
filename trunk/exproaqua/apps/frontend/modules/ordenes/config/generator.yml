@@ -17,17 +17,18 @@ generator:
       fields:
         numord:  { label: "Nro. Orden" }
         desord:  { label: "Descripción" }
-        fecord:  { label: "Fecha" }
+        fecord:  { label: "Fecha Creación" }
         fecanu:  { label: "Fecha" }
         created_at:  { label: "Creación" }
         anulada: { attributes: { disabled: true } }
+        esta_anulado: { label: "¿Anulada?" }
         new_materia_prima: { label: "Materia Prima" }
         new_productos: { label: "Productos" }
         list_materia_prima: { label: "Detalle Materia Prima" }
         list_productos: { label: "Detalle Productos" }
       list:
         title: Ordenes de Producción
-        display: [=numord, =desord, fecord, anulada, a_producir]
+        display: [=numord, =desord, fecord, esta_anulado, a_producir]
       filter:
         fields:
           anulada: { attributes: { disabled: false } }
