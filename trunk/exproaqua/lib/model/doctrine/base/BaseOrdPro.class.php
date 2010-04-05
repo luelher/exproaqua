@@ -93,11 +93,13 @@ abstract class BaseOrdPro extends sfDoctrineRecord
         parent::setUp();
         $this->hasMany('OrdProPro as productos', array(
              'local' => 'id',
-             'foreign' => 'ordpro_id'));
+             'foreign' => 'ordpro_id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasMany('OrdProMatPri as materia_prima', array(
              'local' => 'id',
-             'foreign' => 'ordpro_id'));
+             'foreign' => 'ordpro_id',
+             'onDelete' => 'CASCADE'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

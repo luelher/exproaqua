@@ -27,7 +27,7 @@ abstract class BaseOrdProMatPriForm extends BaseFormDoctrine
       'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'ordpro_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('OrdPro'))),
       'artcomp'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('MateriaPrima'))),
-      'cantidad'   => new sfValidatorInteger(),
+      'cantidad'   => new sfValidatorNumber(),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));
