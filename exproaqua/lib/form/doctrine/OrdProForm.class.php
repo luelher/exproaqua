@@ -42,10 +42,6 @@ class OrdProForm extends BaseOrdProForm
     ));
   }
 
-  protected function doBind(array $values)
-  {
-    parent::doBind($values);
-  }
 
   public function saveEmbeddedForms($con = null, $forms = null)
   {

@@ -14,6 +14,15 @@ class OrdPro extends BaseOrdPro
 {
   public function getaProducir()
   {
-    return count($this->getProductos()).' Productos';
+    $aproducir = '';
+
+    foreach($this->getProductos() as $index => $prod) $aproducir .= $prod->getNombre(). (($index+1)<(count($this->getProductos())) ? ' y ' : '');
+    return $aproducir;
+  }
+
+  public function getEstaAnulado()
+  {
+    if($this->anulada==1) return 'Sí';
+    else return 'No';
   }
 }
