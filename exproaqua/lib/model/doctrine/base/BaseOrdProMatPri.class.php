@@ -10,14 +10,14 @@ Doctrine_Manager::getInstance()->bindComponent('OrdProMatPri', 'premium');
  * @property integer $id
  * @property integer $ordpro_id
  * @property string $artcomp
- * @property integer $cantidad
+ * @property float $cantidad
  * @property Doctrine_Collection $MateriaPrima
  * @property OrdPro $OrdPro
  * 
  * @method integer             getId()           Returns the current record's "id" value
  * @method integer             getOrdproId()     Returns the current record's "ordpro_id" value
  * @method string              getArtcomp()      Returns the current record's "artcomp" value
- * @method integer             getCantidad()     Returns the current record's "cantidad" value
+ * @method float               getCantidad()     Returns the current record's "cantidad" value
  * @method Doctrine_Collection getMateriaPrima() Returns the current record's "MateriaPrima" collection
  * @method OrdPro              getOrdPro()       Returns the current record's "OrdPro" value
  * @method OrdProMatPri        setId()           Sets the current record's "id" value
@@ -53,10 +53,9 @@ abstract class BaseOrdProMatPri extends sfDoctrineRecord
              'notnull' => true,
              'length' => '25',
              ));
-        $this->hasColumn('cantidad', 'integer', 4, array(
-             'type' => 'integer',
+        $this->hasColumn('cantidad', 'float', null, array(
+             'type' => 'float',
              'notnull' => true,
-             'length' => '4',
              ));
     }
 

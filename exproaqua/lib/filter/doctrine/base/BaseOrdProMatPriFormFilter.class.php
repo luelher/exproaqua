@@ -23,7 +23,7 @@ abstract class BaseOrdProMatPriFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'ordpro_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('OrdPro'), 'column' => 'id')),
       'artcomp'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('MateriaPrima'), 'column' => 'codigo')),
-      'cantidad'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'cantidad'   => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'created_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
     ));
