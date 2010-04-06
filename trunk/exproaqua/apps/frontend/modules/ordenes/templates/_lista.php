@@ -1,3 +1,5 @@
+<?php use_helper('Javascript'); ?>
+
     <div class="sf_admin_list">
       <table cellspacing="0" <?php if(isset($options) && $options['list']) echo 'id="'.$options['list'].'"' ?> >
         <thead>
@@ -29,8 +31,15 @@
             <td>
               <ul class="sf_admin_td_actions">
                 <?php if(isset($options) && $options['delete']): ?>
-                  <!-- if (confirm('¿Estas Seguro?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'post'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', 'sf_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_csrf_token'); m.setAttribute('value', '37b17b09605d359aea61a9d8d307b09b'); f.appendChild(m);f.submit(); };return false; -->
-                  <li class="sf_admin_action_delete"><a onclick="if (confirm('¿Estas Seguro?')) { alert('Por Implementar') };return false;" href="/frontend_dev.php/ordenes/<?php echo (isset($options) && isset($options['delete']['delete_action'])) ? $options['delete']['delete_action'] : 'action' ?>/<?php echo $obj->getId() ?>">Eliminar</a></li>  </ul>
+                  <li class="sf_admin_action_delete"><a onclick="if (confirm('¿Estas Seguro?')) { <?php echo remote_function(array(
+            'update'   => (isset($options) && $options['update']) ? $options['update'] : '',
+            'url'      => (isset($options) && $options['delete_action']) ? $options['delete_action'] : '#',
+            'script' => 'true',
+            //'submit' => 'sf_form_generator',
+            //'before' => "$('ajax_activity').setStyle({'display':'inline'})",
+            //'after'  => "$('ajax_activity').setStyle({'display':'none'})",
+            'with'   => "Form.serialize(document.getElementById('sf_form_generator'))+'&file=".$iobj."'",
+          )) ?> };return false;" href="#">Eliminar</a></li>  </ul>
                 <?php endif; ?>
             </td>
           </tr>

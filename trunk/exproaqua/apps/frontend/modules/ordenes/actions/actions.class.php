@@ -56,7 +56,7 @@ class ordenesActions extends autoOrdenesActions
 
   }
 
-  public function renderLists(sfWebRequest $request, OrdPro &$obj)
+  public function renderLists(sfWebRequest $request, OrdPro &$obj, $eliminar = array())
   {
     $this->producto = array();
     $this->error = array();
@@ -154,6 +154,26 @@ class ordenesActions extends autoOrdenesActions
     }
 
     $this->redirect('@ord_pro');
+  }
+
+  public function executeDeleteprod(sfWebRequest $request)
+  {
+    // Eliminando los productos
+
+    // Generando variables para la vista
+    $ordpro = new OrdPro();
+    $this->renderLists($request, &$ordpro);
+
+  }
+
+  public function executeDeletematpri(sfWebRequest $request)
+  {
+    // Eliminando las materias primas
+
+    // Generando variables para la vista
+    $ordpro = new OrdPro();
+    $this->renderLists($request, &$ordpro);
+
   }
 
 

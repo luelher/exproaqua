@@ -1,6 +1,21 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
+<?php use_helper('Javascript') ?>
+
+<?php echo javascript_tag("
+
+  Ajax.Responders.register({
+    onCreate: function() {
+      $('cargando').show();
+    },
+    onComplete: function() {
+      $('cargando').hide();
+    },
+
+  });
+") ?>
+
 <div class="sf_admin_form">
   <?php echo form_tag_for($form, '@ord_pro', array('id' => 'sf_form_generator')) ?>
     <?php echo $form->renderHiddenFields(false) ?>
