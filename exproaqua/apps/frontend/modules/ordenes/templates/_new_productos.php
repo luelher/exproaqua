@@ -16,10 +16,8 @@
             'url'      => 'ordenes/producto',
             'script' => 'true',
             'submit' => 'sf_form_generator',
-            'before' => "$('ajax_activity').setStyle({'display':'inline'})",
-            'after'  => "$('ajax_activity').setStyle({'display':'none'})"
 
-          )) ?> <img alt="Ajax-loader" id="ajax_activity" src="/images/ajax-loader.gif?1269125174" style="display: none; ">
+          )) ?> <img id="cargando" align="center" style="display: none" src="/images/ajax-loader.gif?1269125174">
     </div>
 
     <div id="productos"></div>

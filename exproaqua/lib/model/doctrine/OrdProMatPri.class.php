@@ -25,7 +25,7 @@ class OrdProMatPri extends BaseOrdProMatPri
   public function getExistencia()
   {
     $articulo = Doctrine::getTable('Articulo')->findOneBy('codigo', $this->artcomp);
-    if($articulo) return $articulo->getExistencia();
+    if($articulo) return number_format($articulo->getExistencia(), 2) ;
     else return '<No Encontrado>';
   }
 

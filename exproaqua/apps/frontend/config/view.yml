@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [main.css, default.css]
 
-  javascripts:    []
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/scriptaculous.js]
 
   has_layout:     true
   layout:         layout
