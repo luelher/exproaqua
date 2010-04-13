@@ -35,8 +35,13 @@ generator:
         display: [numord, desord, fecord, anulada]
       form:    ~
       edit:
+        fields:
+          numord: { attributes: { readonly: true } }
         title: Editando Orden de Producción
         display: [numord, desord, anulada, _list_productos, _list_materia_prima]
+        actions:
+          _delete: ~
+          _list: ~
       new:
         title: Nueva Orden de Producción
         display:
