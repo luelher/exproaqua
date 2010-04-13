@@ -16,7 +16,7 @@ class OrdProForm extends BaseOrdProForm
     
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'numord'     => new sfValidatorInteger(),
+      'numord'     => new sfValidatorIntegerWithCorrelative(),
       'desord'     => new sfValidatorString(array('max_length' => 100)),
     ));
 
@@ -24,6 +24,8 @@ class OrdProForm extends BaseOrdProForm
       new sfValidatorDoctrineUnique(array('model' => 'OrdPro', 'column' => array('numord'))),
       new sfValidatorOrdenesProduccion()
     )));
+
+    $this->setDefault('numord', '######');
 
     $this->validatorSchema->setOption('allow_extra_fields', true);
     $this->validatorSchema->setOption('filter_extra_fields', false);
