@@ -38,7 +38,7 @@
             //'submit' => 'sf_form_generator',
             //'before' => "$('ajax_activity').setStyle({'display':'inline'})",
             //'after'  => "$('ajax_activity').setStyle({'display':'none'})",
-            'with'   => "Form.serialize(document.getElementById('sf_form_generator'))+'&file=".$iobj."'",
+            'with'   => "Form.serialize(document.getElementById('sf_form_generator'))+'&row=".$iobj."'",
           )) ?> };return false;" href="#">Eliminar</a></li>  </ul>
                 <?php endif; ?>
             </td>

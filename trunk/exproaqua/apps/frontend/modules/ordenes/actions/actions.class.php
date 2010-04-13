@@ -20,16 +20,18 @@ class ordenesActions extends autoOrdenesActions
     $this->renderLists($request, &$ordpro);
   }
 
-  public function renderListsPost(sfWebRequest $request, OrdPro &$obj)
+  public function renderListsPost(sfWebRequest $request, OrdPro &$obj, $productos = null, $materia_prima = null)
   {
     $this->producto = array();
     $this->error = array();
     $this->ordpro = $request->getParameter('ord_pro');
     $this->producto[] = $this->ordpro['new_productos'];
 
-    $ordpropro = $this->ordpro['list_productos'];
+    if($productos) $ordpropro = $productos;
+    else $ordpropro = $this->ordpro['list_productos'];
 
-    $ordpromatpri = $this->ordpro['list_materia_prima'];
+    if($materia_prima) $ordpromatpri = $materia_prima;
+    else $ordpromatpri = $this->ordpro['list_materia_prima'];
 
     $this->productos = new Doctrine_Collection('OrdProPro');
     $this->materia_prima = new Doctrine_Collection('OrdProMatPri');
@@ -159,20 +161,51 @@ class ordenesActions extends autoOrdenesActions
   public function executeDeleteprod(sfWebRequest $request)
   {
     // Eliminando los productos
+    $fila = $request->getParameter('row');
+
+    $ordpro = $request->getParameter('ord_pro');
+    $producto = $ordpro['list_productos'];
+    $materia_prima = $ordpro['list_materia_prima'];
+
+    if($producto[$fila]){
+      $ordpro = Doctrine::getTable('Articomp')->findBy('compuesto', $producto[$fila]['artcomp']);
+      if($ordpro){
+        foreach($ordpro as $comp){
+          foreach ($materia_prima as $index => $matpri){
+            if($matpri['artcomp']==$comp->getCodigo()){
+              unset ($materia_prima[$index]);
+              break;
+            }
+          }
+        }
+        $materia_prima = array_values($materia_prima);
+      }
+      unset ($producto[$fila]);
+      $producto = array_values($producto);
+    }
+
 
     // Generando variables para la vista
     $ordpro = new OrdPro();
-    $this->renderLists($request, &$ordpro);
+    $this->renderListsPost($request, &$ordpro, $producto, $materia_prima);
 
   }
 
   public function executeDeletematpri(sfWebRequest $request)
   {
     // Eliminando las materias primas
+    $fila = $request->getParameter('row');
+
+    $ordpro = $request->getParameter('ord_pro');
+    $producto = $ordpro['list_productos'];
+    $materia_prima = $ordpro['list_materia_prima'];
+
+    unset ($materia_prima[$fila]);
+    $materia_prima = array_values($materia_prima);
 
     // Generando variables para la vista
     $ordpro = new OrdPro();
-    $this->renderLists($request, &$ordpro);
+    $this->renderListsPost($request, &$ordpro, $producto, $materia_prima);
 
   }
 
