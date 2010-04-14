@@ -19,10 +19,20 @@
           <?php foreach($objs as $iobj => $obj) : ?>
           <tr class="sf_admin_row <?php if($iobj % 2 == 0) echo 'odd'; else echo 'even' ?>">
             <?php foreach($fields as $index => $field) : ?>
-              <?php $campo = 'get'.ucfirst($field);  ?>
+              <?php $campo = 'get'.ucfirst($field); $edit = 'display:none'; $isedit = false; ?>
               <td class="sf_admin_text">
-                <?php echo tag('input', array( 'style' => 'display:none', 'value' => $obj->$campo(), 'name' => (((isset($options) && $options['form']) ? $options['form'] : '').'['.((isset($options) && $options['list']) ? $options['list'] : '').']['.$iobj.']['.$field.']'),'id' => ((isset($options) && $options['form']) ? $options['form'] : '').'_'.((isset($options) && $options['list']) ? $options['list'] : '').'_'.$iobj.'_'.$field)) ?>
-                <?php echo $obj->$campo() ?>
+                <?php 
+                        if(isset($options['edit'])) {
+                            foreach($options['edit'] as $f){
+                              if($field==$f){
+                                $edit = '';
+                                $isedit=true;
+                              }
+                            }
+                         }
+                     ?>
+                <?php echo tag('input', array( 'style' => $edit , 'value' => $obj->$campo(), 'name' => (((isset($options) && $options['form']) ? $options['form'] : '').'['.((isset($options) && $options['list']) ? $options['list'] : '').']['.$iobj.']['.$field.']'),'id' => ((isset($options) && $options['form']) ? $options['form'] : '').'_'.((isset($options) && $options['list']) ? $options['list'] : '').'_'.$iobj.'_'.$field)) ?>
+                <?php if(!$isedit) echo $obj->$campo() ?>
                 <?php if($index==0) : ?>
                   <?php echo tag('input', array( 'style' => 'display:none', 'value' => $obj->getId(), 'name' => (((isset($options) && $options['form']) ? $options['form'] : '').'['.((isset($options) && $options['list']) ? $options['list'] : '').']['.$iobj.'][id]'),'id' => ((isset($options) && $options['form']) ? $options['form'] : '').'_'.((isset($options) && $options['list']) ? $options['list'] : '').'_'.$iobj.'_id')) ?>
                 <?php endif; ?>

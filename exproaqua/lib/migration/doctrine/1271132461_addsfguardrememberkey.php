@@ -10,6 +10,8 @@ class Addsfguardrememberkey extends Doctrine_Migration_Base
              'id' => 
              array(
               'type' => 'integer',
+              'fixed' => 0,
+              'unsigned' => false,
               'primary' => true,
               'autoincrement' => true,
               'length' => 4,
@@ -17,29 +19,50 @@ class Addsfguardrememberkey extends Doctrine_Migration_Base
              'user_id' => 
              array(
               'type' => 'integer',
+              'fixed' => 0,
+              'unsigned' => false,
+              'primary' => false,
+              'notnull' => false,
+              'autoincrement' => false,
               'length' => 4,
              ),
              'remember_key' => 
              array(
               'type' => 'string',
+              'fixed' => 0,
+              'unsigned' => false,
+              'primary' => false,
+              'notnull' => false,
+              'autoincrement' => false,
               'length' => 32,
              ),
              'ip_address' => 
              array(
               'type' => 'string',
+              'fixed' => 0,
+              'unsigned' => false,
               'primary' => true,
+              'autoincrement' => false,
               'length' => 50,
              ),
              'created_at' => 
              array(
-              'notnull' => true,
               'type' => 'timestamp',
+              'fixed' => 0,
+              'unsigned' => false,
+              'primary' => false,
+              'notnull' => true,
+              'autoincrement' => false,
               'length' => 25,
              ),
              'updated_at' => 
              array(
-              'notnull' => true,
               'type' => 'timestamp',
+              'fixed' => 0,
+              'unsigned' => false,
+              'primary' => false,
+              'notnull' => true,
+              'autoincrement' => false,
               'length' => 25,
              ),
              ), array(

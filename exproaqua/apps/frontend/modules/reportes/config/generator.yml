@@ -13,9 +13,40 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
-      form:    ~
-      edit:    ~
-      new:     ~
+      fields:
+        numord:  { label: "Nro. Orden" }
+        desord:  { label: "Descripción" }
+        fecord:  { label: "Fecha Creación" }
+        fecrep:  { label: "Fecha Reporte" }
+        fecanu:  { label: "Fecha" }
+        created_at:  { label: "Creación" }
+        anulada: { attributes: { disabled: true } }
+        esta_anulado: { label: "¿Anulada?" }
+        esta_reportado: { label: "¿Reportado?" }
+        reportada: { label: "¿Reportada?" }
+        new_materia_prima: { label: "Materia Prima" }
+        new_productos: { label: "Productos" }
+        list_materia_prima: { label: "Detalle Materia Prima" }
+        list_productos: { label: "Detalle Productos" }
+      list:
+        title: Reportes de Producción
+        display: [=numord, =desord, fecord, a_producir, reportada, fecrep]
+        actions: {}
+        object_actions:
+          _edit: ~
+        batch_actions: {}
+      filter:
+        fields:
+          anulada: { attributes: { disabled: false } }
+        display: [numord, desord, fecord, reportada, fecrep]
+      form:
+        class: RepProForm
+      edit:
+        fields:
+          numord: { attributes: { readonly: true } }
+          reportada: { label: "¿Reportada?", attributes: { disabled: true } }
+        title: Editando Reporte de Producción
+        display: [numord, desord, anulada, reportada, _list_productos, _list_materia_prima]
+        actions:
+          _list: ~
+          _save: ~

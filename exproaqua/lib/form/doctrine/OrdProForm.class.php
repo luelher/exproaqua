@@ -77,3 +77,71 @@ class OrdProForm extends BaseOrdProForm
 
 
 }
+
+
+class RepProForm extends BaseOrdProForm
+{
+  public function setup()
+  {
+    parent::setup();
+
+    $this->setValidators(array(
+      'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'numord'     => new sfValidatorIntegerWithCorrelative(),
+      'desord'     => new sfValidatorString(array('max_length' => 100)),
+    ));
+
+    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(
+      new sfValidatorDoctrineUnique(array('model' => 'OrdPro', 'column' => array('numord'))),
+      new sfValidatorReportesProduccion()
+    )));
+
+    $this->setDefault('numord', '######');
+
+    $this->validatorSchema->setOption('allow_extra_fields', true);
+    $this->validatorSchema->setOption('filter_extra_fields', false);
+
+
+    $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
+
+  }
+
+  public function configure()
+  {
+  }
+
+
+  public function saveEmbeddedForms($con = null, $forms = null)
+  {
+    if (null === $con) $con = $this->getConnection();
+
+    $list_materia_prima = $this->taintedValues['list_materia_prima'];
+    $list_productos = $this->taintedValues['list_productos'];
+
+    foreach($list_productos as $prod){
+      $ordpropro = Doctrine::getTable('OrdProPro')->find($prod['id']);
+      if($ordpropro){
+        $ordpropro->setResultado($prod['resultado']);
+        $ordpropro->save($con);
+      }
+    }
+
+    foreach($list_materia_prima as $matpri){
+
+      $ordpromatpri = Doctrine::getTable('OrdProMatPri')->find($matpri['id']);
+      if($ordpromatpri){
+        $ordpromatpri->setResultado($matpri['resultado']);
+        $ordpromatpri->save($con);
+      }
+
+    }
+
+  }
+
+  public function setObject($obj)
+  {
+    $this->object = $obj;
+  }
+
+
+}

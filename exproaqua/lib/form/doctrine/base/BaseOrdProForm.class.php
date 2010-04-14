@@ -21,6 +21,8 @@ abstract class BaseOrdProForm extends BaseFormDoctrine
       'fecord'     => new sfWidgetFormDateTime(),
       'anulada'    => new sfWidgetFormInputCheckbox(),
       'fecanu'     => new sfWidgetFormDateTime(),
+      'reportada'  => new sfWidgetFormInputCheckbox(),
+      'fecrep'     => new sfWidgetFormDateTime(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -32,6 +34,8 @@ abstract class BaseOrdProForm extends BaseFormDoctrine
       'fecord'     => new sfValidatorDateTime(),
       'anulada'    => new sfValidatorBoolean(array('required' => false)),
       'fecanu'     => new sfValidatorDateTime(array('required' => false)),
+      'reportada'  => new sfValidatorBoolean(array('required' => false)),
+      'fecrep'     => new sfValidatorDateTime(array('required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));

@@ -6,6 +6,18 @@ class Version167 extends Doctrine_Migration_Base
 {
     public function up()
     {
+        $this->addColumn('ordpro', 'reportada', 'boolean', '25', array(
+             'default' => '0',
+             ));
+        $this->addColumn('ordpro', 'fecrep', 'timestamp', '25', array(
+             'notnull' => '',
+             ));
+        $this->addColumn('ordpromatpri', 'resultado', 'float', '', array(
+             'notnull' => '1',
+             ));
+        $this->addColumn('ordpropro', 'resultado', 'integer', '4', array(
+             'notnull' => '1',
+             ));
         $this->changeColumn('sf_guard_group', 'id', 'integer', '4', array(
              'primary' => '1',
              'autoincrement' => '1',
@@ -75,6 +87,9 @@ class Version167 extends Doctrine_Migration_Base
 
     public function down()
     {
-
+        $this->removeColumn('ordpro', 'reportada');
+        $this->removeColumn('ordpro', 'fecrep');
+        $this->removeColumn('ordpromatpri', 'resultado');
+        $this->removeColumn('ordpropro', 'resultado');
     }
 }
