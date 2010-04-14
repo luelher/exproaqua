@@ -28,9 +28,9 @@ class Addordpromatpri extends Doctrine_Migration_Base
              ),
              'cantidad' => 
              array(
-              'type' => 'integer',
+              'type' => 'float',
               'notnull' => true,
-              'length' => 4,
+              'length' => NULL,
              ),
              'created_at' => 
              array(

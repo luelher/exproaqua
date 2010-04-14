@@ -19,6 +19,7 @@ abstract class BaseOrdProProForm extends BaseFormDoctrine
       'ordpro_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('OrdPro'), 'add_empty' => false)),
       'artcomp'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ArticuloCompuesto'), 'add_empty' => false)),
       'cantidad'   => new sfWidgetFormInputText(),
+      'resultado'  => new sfWidgetFormInputText(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -28,6 +29,7 @@ abstract class BaseOrdProProForm extends BaseFormDoctrine
       'ordpro_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('OrdPro'))),
       'artcomp'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ArticuloCompuesto'))),
       'cantidad'   => new sfValidatorInteger(),
+      'resultado'  => new sfValidatorInteger(),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));

@@ -55,6 +55,12 @@ OrdPro:
     fecanu:
       type: timestamp
       notnull: false
+    reportada:
+      type: boolean
+      default: 0
+    fecrep:
+      type: timestamp
+      notnull: false
   indexes:
     numord_idx:
       fields: [numord]
@@ -91,6 +97,9 @@ OrdProPro:
     cantidad:
       type: integer(4)
       notnull: true
+    resultado:
+      type: integer(4)
+      notnull: true
   relations:
     ArticuloCompuesto:
       class: Articulo
@@ -113,6 +122,9 @@ OrdProMatPri:
       type: string(25)
       notnull: true
     cantidad:
+      type: float
+      notnull: true
+    resultado:
       type: float
       notnull: true
   relations:
