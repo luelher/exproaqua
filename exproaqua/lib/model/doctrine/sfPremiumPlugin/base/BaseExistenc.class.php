@@ -18,29 +18,35 @@ Doctrine_Manager::getInstance()->bindComponent('Existenc', 'premium');
  * @property string $documento
  * @property string $tipodoc
  * @property date $fechacrea
+ * @property Articulo $Existencias
+ * @property Almacene $Almacenes
  * 
- * @method string   getIdEmpresa()  Returns the current record's "id_empresa" value
- * @method string   getAgencia()    Returns the current record's "agencia" value
- * @method string   getCodigo()     Returns the current record's "codigo" value
- * @method string   getGrupo()      Returns the current record's "grupo" value
- * @method string   getAlmacen()    Returns the current record's "almacen" value
- * @method float    getExistencia() Returns the current record's "existencia" value
- * @method string   getUbicacion()  Returns the current record's "ubicacion" value
- * @method string   getUsuario()    Returns the current record's "usuario" value
- * @method string   getDocumento()  Returns the current record's "documento" value
- * @method string   getTipodoc()    Returns the current record's "tipodoc" value
- * @method date     getFechacrea()  Returns the current record's "fechacrea" value
- * @method Existenc setIdEmpresa()  Sets the current record's "id_empresa" value
- * @method Existenc setAgencia()    Sets the current record's "agencia" value
- * @method Existenc setCodigo()     Sets the current record's "codigo" value
- * @method Existenc setGrupo()      Sets the current record's "grupo" value
- * @method Existenc setAlmacen()    Sets the current record's "almacen" value
- * @method Existenc setExistencia() Sets the current record's "existencia" value
- * @method Existenc setUbicacion()  Sets the current record's "ubicacion" value
- * @method Existenc setUsuario()    Sets the current record's "usuario" value
- * @method Existenc setDocumento()  Sets the current record's "documento" value
- * @method Existenc setTipodoc()    Sets the current record's "tipodoc" value
- * @method Existenc setFechacrea()  Sets the current record's "fechacrea" value
+ * @method string   getIdEmpresa()   Returns the current record's "id_empresa" value
+ * @method string   getAgencia()     Returns the current record's "agencia" value
+ * @method string   getCodigo()      Returns the current record's "codigo" value
+ * @method string   getGrupo()       Returns the current record's "grupo" value
+ * @method string   getAlmacen()     Returns the current record's "almacen" value
+ * @method float    getExistencia()  Returns the current record's "existencia" value
+ * @method string   getUbicacion()   Returns the current record's "ubicacion" value
+ * @method string   getUsuario()     Returns the current record's "usuario" value
+ * @method string   getDocumento()   Returns the current record's "documento" value
+ * @method string   getTipodoc()     Returns the current record's "tipodoc" value
+ * @method date     getFechacrea()   Returns the current record's "fechacrea" value
+ * @method Articulo getExistencias() Returns the current record's "Existencias" value
+ * @method Almacene getAlmacenes()   Returns the current record's "Almacenes" value
+ * @method Existenc setIdEmpresa()   Sets the current record's "id_empresa" value
+ * @method Existenc setAgencia()     Sets the current record's "agencia" value
+ * @method Existenc setCodigo()      Sets the current record's "codigo" value
+ * @method Existenc setGrupo()       Sets the current record's "grupo" value
+ * @method Existenc setAlmacen()     Sets the current record's "almacen" value
+ * @method Existenc setExistencia()  Sets the current record's "existencia" value
+ * @method Existenc setUbicacion()   Sets the current record's "ubicacion" value
+ * @method Existenc setUsuario()     Sets the current record's "usuario" value
+ * @method Existenc setDocumento()   Sets the current record's "documento" value
+ * @method Existenc setTipodoc()     Sets the current record's "tipodoc" value
+ * @method Existenc setFechacrea()   Sets the current record's "fechacrea" value
+ * @method Existenc setExistencias() Sets the current record's "Existencias" value
+ * @method Existenc setAlmacenes()   Sets the current record's "Almacenes" value
  * 
  * @package    exproaqua
  * @subpackage model
@@ -161,6 +167,12 @@ abstract class BaseExistenc extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Articulo as Existencias', array(
+             'local' => 'codigo',
+             'foreign' => 'codigo'));
+
+        $this->hasOne('Almacene as Almacenes', array(
+             'local' => 'almacen',
+             'foreign' => 'codigo'));
     }
 }

@@ -15,7 +15,7 @@
 
   });
 ") ?>
-
+<img id="cargando" align="center" style="display: none" src="/images/ajax-loader.gif?1269125174">
 <div class="sf_admin_form">
   <?php echo form_tag_for($form, '@ord_pro', array('id' => 'sf_form_generator')) ?>
     <?php echo $form->renderHiddenFields(false) ?>

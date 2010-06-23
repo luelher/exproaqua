@@ -17,19 +17,26 @@ AlmConf:
     almproter:
       type: string(2)
       notnull: true
+    usuario:
+      type: string(20)
+      notnull: true
   relations:
-    Almacene_1:
+    MatPri:
       class: Almacene
       local: almmatpri
       foreign: codigo
-    Almacene_2:
+    ProPro:
       class: Almacene
       local: almpropro
       foreign: codigo
-    Almacene_3:
+    ProTer:
       class: Almacene
       local: almproter
       foreign: codigo
+    Usuarios:
+      class: Usuarios
+      local: usuario
+      foreign: username
 
 OrdPro:
   tableName: ordpro
@@ -105,7 +112,7 @@ OrdProPro:
       class: Articulo
       local: artcomp
       foreign: codigo
-      type: many
+      type: one
 
 OrdProMatPri:
   tableName: ordpromatpri
@@ -132,4 +139,4 @@ OrdProMatPri:
       class: Articulo
       local: artcomp
       foreign: codigo
-      type: many
+      type: one

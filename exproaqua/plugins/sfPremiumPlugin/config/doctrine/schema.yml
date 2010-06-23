@@ -1085,6 +1085,12 @@ Articomp:
       default: '0'
       notnull: true
       autoincrement: false
+  relations:
+    Articulo:
+      class: Articulo
+      local: codigo
+      foreign: codigo
+      type: one
 Articulo:
   connection: premium
   tableName: articulo
@@ -2424,7 +2430,6 @@ Articulo:
       class: Articomp
       local: codigo
       foreign: compuesto
-
 Artilotes:
   connection: premium
   tableName: artilotes
@@ -12798,6 +12803,17 @@ Existenc:
       default: '0000-00-00'
       notnull: true
       autoincrement: false
+  relations:
+    Existencias:
+      class: Articulo
+      local: codigo
+      foreign: codigo
+    Almacenes:
+      class: Almacene
+      local: almacen
+      foreign: codigo
+
+
 Extallacolor:
   connection: premium
   tableName: extallacolor

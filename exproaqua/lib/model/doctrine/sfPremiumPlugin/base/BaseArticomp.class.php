@@ -21,38 +21,38 @@ Doctrine_Manager::getInstance()->bindComponent('Articomp', 'premium');
  * @property float $factor
  * @property string $notas
  * @property integer $tipodotacion
- * @property Doctrine_Collection $Articulo
+ * @property Articulo $Articulo
  * 
- * @method string              getIdEmpresa()    Returns the current record's "id_empresa" value
- * @method string              getAgencia()      Returns the current record's "agencia" value
- * @method string              getCompuesto()    Returns the current record's "compuesto" value
- * @method string              getGrupo()        Returns the current record's "grupo" value
- * @method string              getCodigo()       Returns the current record's "codigo" value
- * @method string              getNombre()       Returns the current record's "nombre" value
- * @method float               getPreciounit()   Returns the current record's "preciounit" value
- * @method float               getCostounit()    Returns the current record's "costounit" value
- * @method float               getCantidad()     Returns the current record's "cantidad" value
- * @method string              getUnidad()       Returns the current record's "unidad" value
- * @method float               getSemodifica()   Returns the current record's "semodifica" value
- * @method float               getFactor()       Returns the current record's "factor" value
- * @method string              getNotas()        Returns the current record's "notas" value
- * @method integer             getTipodotacion() Returns the current record's "tipodotacion" value
- * @method Doctrine_Collection getArticulo()     Returns the current record's "Articulo" collection
- * @method Articomp            setIdEmpresa()    Sets the current record's "id_empresa" value
- * @method Articomp            setAgencia()      Sets the current record's "agencia" value
- * @method Articomp            setCompuesto()    Sets the current record's "compuesto" value
- * @method Articomp            setGrupo()        Sets the current record's "grupo" value
- * @method Articomp            setCodigo()       Sets the current record's "codigo" value
- * @method Articomp            setNombre()       Sets the current record's "nombre" value
- * @method Articomp            setPreciounit()   Sets the current record's "preciounit" value
- * @method Articomp            setCostounit()    Sets the current record's "costounit" value
- * @method Articomp            setCantidad()     Sets the current record's "cantidad" value
- * @method Articomp            setUnidad()       Sets the current record's "unidad" value
- * @method Articomp            setSemodifica()   Sets the current record's "semodifica" value
- * @method Articomp            setFactor()       Sets the current record's "factor" value
- * @method Articomp            setNotas()        Sets the current record's "notas" value
- * @method Articomp            setTipodotacion() Sets the current record's "tipodotacion" value
- * @method Articomp            setArticulo()     Sets the current record's "Articulo" collection
+ * @method string   getIdEmpresa()    Returns the current record's "id_empresa" value
+ * @method string   getAgencia()      Returns the current record's "agencia" value
+ * @method string   getCompuesto()    Returns the current record's "compuesto" value
+ * @method string   getGrupo()        Returns the current record's "grupo" value
+ * @method string   getCodigo()       Returns the current record's "codigo" value
+ * @method string   getNombre()       Returns the current record's "nombre" value
+ * @method float    getPreciounit()   Returns the current record's "preciounit" value
+ * @method float    getCostounit()    Returns the current record's "costounit" value
+ * @method float    getCantidad()     Returns the current record's "cantidad" value
+ * @method string   getUnidad()       Returns the current record's "unidad" value
+ * @method float    getSemodifica()   Returns the current record's "semodifica" value
+ * @method float    getFactor()       Returns the current record's "factor" value
+ * @method string   getNotas()        Returns the current record's "notas" value
+ * @method integer  getTipodotacion() Returns the current record's "tipodotacion" value
+ * @method Articulo getArticulo()     Returns the current record's "Articulo" value
+ * @method Articomp setIdEmpresa()    Sets the current record's "id_empresa" value
+ * @method Articomp setAgencia()      Sets the current record's "agencia" value
+ * @method Articomp setCompuesto()    Sets the current record's "compuesto" value
+ * @method Articomp setGrupo()        Sets the current record's "grupo" value
+ * @method Articomp setCodigo()       Sets the current record's "codigo" value
+ * @method Articomp setNombre()       Sets the current record's "nombre" value
+ * @method Articomp setPreciounit()   Sets the current record's "preciounit" value
+ * @method Articomp setCostounit()    Sets the current record's "costounit" value
+ * @method Articomp setCantidad()     Sets the current record's "cantidad" value
+ * @method Articomp setUnidad()       Sets the current record's "unidad" value
+ * @method Articomp setSemodifica()   Sets the current record's "semodifica" value
+ * @method Articomp setFactor()       Sets the current record's "factor" value
+ * @method Articomp setNotas()        Sets the current record's "notas" value
+ * @method Articomp setTipodotacion() Sets the current record's "tipodotacion" value
+ * @method Articomp setArticulo()     Sets the current record's "Articulo" value
  * 
  * @package    exproaqua
  * @subpackage model
@@ -200,8 +200,8 @@ abstract class BaseArticomp extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Articulo', array(
-             'local' => 'compuesto',
+        $this->hasOne('Articulo', array(
+             'local' => 'codigo',
              'foreign' => 'codigo'));
     }
 }

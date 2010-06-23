@@ -17,7 +17,7 @@
             'script' => 'true',
             'submit' => 'sf_form_generator',
 
-          )) ?> <img id="cargando" align="center" style="display: none" src="/images/ajax-loader.gif?1269125174">
+          )) ?>
     </div>
 
     <div id="productos"></div>

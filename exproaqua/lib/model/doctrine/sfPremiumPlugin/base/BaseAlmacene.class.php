@@ -17,6 +17,7 @@ Doctrine_Manager::getInstance()->bindComponent('Almacene', 'premium');
  * @property float $aux1
  * @property float $servicio
  * @property float $rma
+ * @property Doctrine_Collection $Existenc
  * @property Doctrine_Collection $AlmConf
  * 
  * @method string              getIdEmpresa()  Returns the current record's "id_empresa" value
@@ -29,6 +30,7 @@ Doctrine_Manager::getInstance()->bindComponent('Almacene', 'premium');
  * @method float               getAux1()       Returns the current record's "aux1" value
  * @method float               getServicio()   Returns the current record's "servicio" value
  * @method float               getRma()        Returns the current record's "rma" value
+ * @method Doctrine_Collection getExistenc()   Returns the current record's "Existenc" collection
  * @method Doctrine_Collection getAlmConf()    Returns the current record's "AlmConf" collection
  * @method Almacene            setIdEmpresa()  Sets the current record's "id_empresa" value
  * @method Almacene            setAgencia()    Sets the current record's "agencia" value
@@ -40,6 +42,7 @@ Doctrine_Manager::getInstance()->bindComponent('Almacene', 'premium');
  * @method Almacene            setAux1()       Sets the current record's "aux1" value
  * @method Almacene            setServicio()   Sets the current record's "servicio" value
  * @method Almacene            setRma()        Sets the current record's "rma" value
+ * @method Almacene            setExistenc()   Sets the current record's "Existenc" collection
  * @method Almacene            setAlmConf()    Sets the current record's "AlmConf" collection
  * 
  * @package    exproaqua
@@ -151,6 +154,10 @@ abstract class BaseAlmacene extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Existenc', array(
+             'local' => 'codigo',
+             'foreign' => 'almacen'));
+
         $this->hasMany('AlmConf', array(
              'local' => 'codigo',
              'foreign' => 'almmatpri'));

@@ -16,18 +16,20 @@ abstract class BaseAlmConfForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'almmatpri'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Almacene_1'), 'add_empty' => false)),
-      'almpropro'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Almacene_2'), 'add_empty' => false)),
-      'almproter'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Almacene_3'), 'add_empty' => false)),
+      'almmatpri'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('MatPri'), 'add_empty' => false)),
+      'almpropro'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ProPro'), 'add_empty' => false)),
+      'almproter'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ProTer'), 'add_empty' => false)),
+      'usuario'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Usuarios'), 'add_empty' => false)),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'almmatpri'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Almacene_1'))),
-      'almpropro'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Almacene_2'))),
-      'almproter'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Almacene_3'))),
+      'almmatpri'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('MatPri'))),
+      'almpropro'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ProPro'))),
+      'almproter'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ProTer'))),
+      'usuario'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Usuarios'))),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));

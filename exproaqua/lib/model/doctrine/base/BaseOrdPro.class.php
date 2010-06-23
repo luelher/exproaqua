@@ -13,6 +13,8 @@ Doctrine_Manager::getInstance()->bindComponent('OrdPro', 'premium');
  * @property timestamp $fecord
  * @property boolean $anulada
  * @property timestamp $fecanu
+ * @property boolean $reportada
+ * @property timestamp $fecrep
  * @property Doctrine_Collection $productos
  * @property Doctrine_Collection $materia_prima
  * 
@@ -22,6 +24,8 @@ Doctrine_Manager::getInstance()->bindComponent('OrdPro', 'premium');
  * @method timestamp           getFecord()        Returns the current record's "fecord" value
  * @method boolean             getAnulada()       Returns the current record's "anulada" value
  * @method timestamp           getFecanu()        Returns the current record's "fecanu" value
+ * @method boolean             getReportada()     Returns the current record's "reportada" value
+ * @method timestamp           getFecrep()        Returns the current record's "fecrep" value
  * @method Doctrine_Collection getProductos()     Returns the current record's "productos" collection
  * @method Doctrine_Collection getMateriaPrima()  Returns the current record's "materia_prima" collection
  * @method OrdPro              setId()            Sets the current record's "id" value
@@ -30,6 +34,8 @@ Doctrine_Manager::getInstance()->bindComponent('OrdPro', 'premium');
  * @method OrdPro              setFecord()        Sets the current record's "fecord" value
  * @method OrdPro              setAnulada()       Sets the current record's "anulada" value
  * @method OrdPro              setFecanu()        Sets the current record's "fecanu" value
+ * @method OrdPro              setReportada()     Sets the current record's "reportada" value
+ * @method OrdPro              setFecrep()        Sets the current record's "fecrep" value
  * @method OrdPro              setProductos()     Sets the current record's "productos" collection
  * @method OrdPro              setMateriaPrima()  Sets the current record's "materia_prima" collection
  * 
@@ -69,6 +75,14 @@ abstract class BaseOrdPro extends sfDoctrineRecord
              'default' => 0,
              ));
         $this->hasColumn('fecanu', 'timestamp', null, array(
+             'type' => 'timestamp',
+             'notnull' => false,
+             ));
+        $this->hasColumn('reportada', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => 0,
+             ));
+        $this->hasColumn('fecrep', 'timestamp', null, array(
              'type' => 'timestamp',
              'notnull' => false,
              ));

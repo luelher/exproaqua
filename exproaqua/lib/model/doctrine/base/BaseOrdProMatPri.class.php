@@ -11,21 +11,24 @@ Doctrine_Manager::getInstance()->bindComponent('OrdProMatPri', 'premium');
  * @property integer $ordpro_id
  * @property string $artcomp
  * @property float $cantidad
- * @property Doctrine_Collection $MateriaPrima
+ * @property float $resultado
+ * @property Articulo $MateriaPrima
  * @property OrdPro $OrdPro
  * 
- * @method integer             getId()           Returns the current record's "id" value
- * @method integer             getOrdproId()     Returns the current record's "ordpro_id" value
- * @method string              getArtcomp()      Returns the current record's "artcomp" value
- * @method float               getCantidad()     Returns the current record's "cantidad" value
- * @method Doctrine_Collection getMateriaPrima() Returns the current record's "MateriaPrima" collection
- * @method OrdPro              getOrdPro()       Returns the current record's "OrdPro" value
- * @method OrdProMatPri        setId()           Sets the current record's "id" value
- * @method OrdProMatPri        setOrdproId()     Sets the current record's "ordpro_id" value
- * @method OrdProMatPri        setArtcomp()      Sets the current record's "artcomp" value
- * @method OrdProMatPri        setCantidad()     Sets the current record's "cantidad" value
- * @method OrdProMatPri        setMateriaPrima() Sets the current record's "MateriaPrima" collection
- * @method OrdProMatPri        setOrdPro()       Sets the current record's "OrdPro" value
+ * @method integer      getId()           Returns the current record's "id" value
+ * @method integer      getOrdproId()     Returns the current record's "ordpro_id" value
+ * @method string       getArtcomp()      Returns the current record's "artcomp" value
+ * @method float        getCantidad()     Returns the current record's "cantidad" value
+ * @method float        getResultado()    Returns the current record's "resultado" value
+ * @method Articulo     getMateriaPrima() Returns the current record's "MateriaPrima" value
+ * @method OrdPro       getOrdPro()       Returns the current record's "OrdPro" value
+ * @method OrdProMatPri setId()           Sets the current record's "id" value
+ * @method OrdProMatPri setOrdproId()     Sets the current record's "ordpro_id" value
+ * @method OrdProMatPri setArtcomp()      Sets the current record's "artcomp" value
+ * @method OrdProMatPri setCantidad()     Sets the current record's "cantidad" value
+ * @method OrdProMatPri setResultado()    Sets the current record's "resultado" value
+ * @method OrdProMatPri setMateriaPrima() Sets the current record's "MateriaPrima" value
+ * @method OrdProMatPri setOrdPro()       Sets the current record's "OrdPro" value
  * 
  * @package    exproaqua
  * @subpackage model
@@ -57,12 +60,16 @@ abstract class BaseOrdProMatPri extends sfDoctrineRecord
              'type' => 'float',
              'notnull' => true,
              ));
+        $this->hasColumn('resultado', 'float', null, array(
+             'type' => 'float',
+             'notnull' => true,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Articulo as MateriaPrima', array(
+        $this->hasOne('Articulo as MateriaPrima', array(
              'local' => 'artcomp',
              'foreign' => 'codigo'));
 

@@ -17,7 +17,13 @@ class ordenesActions extends autoOrdenesActions
   public function executeProducto(sfWebRequest $request)
   {
     $ordpro = new OrdPro();
-    $this->renderLists($request, &$ordpro);
+    $this->renderLists($request, &$ordpro, 'P');
+  }
+
+  public function executeMateriaPrima(sfWebRequest $request)
+  {
+    $ordpro = new OrdPro();
+    $this->renderLists($request, &$ordpro, 'M');
   }
 
   public function renderListsPost(sfWebRequest $request, OrdPro &$obj, $productos = null, $materia_prima = null)
@@ -27,11 +33,19 @@ class ordenesActions extends autoOrdenesActions
     $this->ordpro = $request->getParameter('ord_pro');
     $this->producto[] = $this->ordpro['new_productos'];
 
-    if($productos) $ordpropro = $productos;
-    else $ordpropro = $this->ordpro['list_productos'];
+    if($productos!==null) $ordpropro = $productos;
+    else{
+      if(isset($this->ordpro['list_productos']))
+        $ordpropro = $this->ordpro['list_productos'];
+      else $ordpropro = array();
+    }
 
-    if($materia_prima) $ordpromatpri = $materia_prima;
-    else $ordpromatpri = $this->ordpro['list_materia_prima'];
+    if($materia_prima!==null) $ordpromatpri = $materia_prima;
+    else{
+     if(isset($this->ordpro['list_materia_prima']))
+       $ordpromatpri = $this->ordpro['list_materia_prima'];
+     else $ordpromatpri = array();
+    }
 
     $this->productos = new Doctrine_Collection('OrdProPro');
     $this->materia_prima = new Doctrine_Collection('OrdProMatPri');
@@ -58,12 +72,18 @@ class ordenesActions extends autoOrdenesActions
 
   }
 
-  public function renderLists(sfWebRequest $request, OrdPro &$obj, $eliminar = array())
+  public function renderLists(sfWebRequest $request, OrdPro &$obj, $validar)
   {
+    $almconf = Doctrine_Query::create()->from('AlmConf')->fetchOne(array());
+    $almmatpri = $almconf->getMatPri();
+    $almproter = $almconf->getProTer();
+
     $this->producto = array();
+    $this->matpri = array();
     $this->error = array();
     $this->ordpro = $request->getParameter('ord_pro');
     $this->producto[] = $this->ordpro['new_productos'];
+    $this->matpri[] = $this->ordpro['new_materia_prima'];
 
     $ordpropro = isset ($this->ordpro['list_productos']) ? $this->ordpro['list_productos'] : array();
 
@@ -72,58 +92,84 @@ class ordenesActions extends autoOrdenesActions
     $this->productos = new Doctrine_Collection('OrdProPro');
     $this->materia_prima = new Doctrine_Collection('OrdProMatPri');
 
-    // Verifico que no se haya seleccionado el producto actual
-    if($ordpropro){
-      foreach($ordpropro as $propro){
-        if($propro['artcomp'] == $this->producto[0]['artcomp']){
-          $this->error[] = 'El Producto Seleccionado Ya existe, si desea modificarlo, eliminelo y vuelva a ingresalo';
-          $this->producto[0] = $propro;
-        }else{
-          $this->producto[] = array('artcomp' => $propro['artcomp'], 'cantidad' => $propro['cantidad']);
+    if($validar=='P'){
+      // Verifico que no se haya seleccionado el producto actual
+      if($ordpropro){
+        foreach($ordpropro as $propro){
+          if($propro['artcomp'] == $this->producto[0]['artcomp']){
+            $this->error[] = 'El Producto Seleccionado Ya existe, si desea modificarlo, eliminelo y vuelva a ingresalo';
+            $this->producto[0] = $propro;
+          }else{
+            $this->producto[] = array('artcomp' => $propro['artcomp'], 'cantidad' => $propro['cantidad']);
+          }
         }
       }
-    }
 
-    foreach($this->producto as $producto){
+      foreach($this->producto as $producto){
 
-      if(isset($producto['artcomp']) && isset($producto['cantidad']) && is_numeric($producto['cantidad'])){
+        if(isset($producto['artcomp']) && isset($producto['cantidad']) && is_numeric($producto['cantidad'])){
 
-        $articulo = Doctrine::getTable('Articulo')->findOneBy('codigo', $producto['artcomp']);
-        if($articulo){
-          $articomp = Doctrine::getTable('Articomp')->findBy('compuesto', $producto['artcomp']);
-          if($articomp){
+          $articulo = Doctrine::getTable('Articulo')->findOneBy('codigo', $producto['artcomp']);
+          if($articulo){
+            $articomp = Doctrine::getTable('Articomp')->findBy('compuesto', $producto['artcomp']);
+            if($articomp){
 
-            // Creo el nuevo producto
-            $ordpropro = new OrdProPro();
-            $ordpropro->setArtcomp($articulo->getCodigo());
-            $ordpropro->setCantidad(intval($producto['cantidad']));
-            $this->productos->add($ordpropro);
+              // Creo el nuevo producto
+              $ordpropro = new OrdProPro();
+              $ordpropro->setArtcomp($articulo->getCodigo());
+              $ordpropro->setCantidad(intval($producto['cantidad']));
+              $this->productos->add($ordpropro);
 
-            // Creo la nueva materia prima en base al producto
-            foreach($articomp as $comp){
-              $ordpromatpri = new OrdProMatPri();
-              $ordpromatpri->setCodcomp($articulo->getCodigo());
-              $ordpromatpri->setNomcomp($articulo->getNombre());
-              $ordpromatpri->setArtcomp($comp->getCodigo());
-              $ordpromatpri->setCantidad($comp->getCantidad() * $producto['cantidad']);
-
-              $this->materia_prima->add($ordpromatpri);
+            }else{
+              $this->error[] = 'El Producto Seleccionado no Existe Como Artículo Compuesto';
             }
+          }else{
+            $this->error[] = 'El Producto Seleccionado no Existe en el almacen de materia prima ('.$almmatpri->getCodigo().')';
+          }
+
+        }else{
+            $this->error[] = 'Debe Seleccionar un Producto y la cantidad a producir. La cantidad debe ser entera';
+          }
+
+        }
+
+    }elseif($validar=='M'){
+      if($ordpromatpri){
+        foreach($ordpromatpri as $matpri){
+          if($matpri['artcomp'] == $this->matpri[0]['artcomp']){
+            $this->error[] = 'La Materia Prima Seleccionada Ya existe, si desea modificarlo, eliminelo y vuelva a ingresalo';
+            $this->matpri[0] = $matpri;
+          }else{
+            $this->matpri[] = array('artcomp' => $matpri['artcomp'], 'cantidad' => $matpri['cantidad']);
+          }
+        }
+      }
+
+      foreach($this->matpri as $matpri){
+
+        if(isset($matpri['artcomp']) && isset($matpri['cantidad']) && is_numeric($matpri['cantidad'])){
+
+          $articulo = Doctrine_Query::create()->from('Existenc e')->where('e.codigo = ? AND e.almacen= ?', array($matpri['artcomp'],$almmatpri->getCodigo()))->fetchOne();
+          if($articulo){
+            // Creo el nuevo producto
+            $ordpromatpri = new OrdProMatPri();
+            $ordpromatpri->setArtcomp($articulo['codigo']);
+            $ordpromatpri->setCantidad(intval($matpri['cantidad']));
+            $this->materia_prima->add($ordpromatpri);
 
           }else{
-            $this->error[] = 'El Producto Seleccionado no Existe Como Artículo Compuesto';
+            $this->error_matpri[] = 'El Producto Seleccionado no Existe en el almacen de materia prima ('.$almmatpri->getCodigo().')';
           }
+
         }else{
-          $this->error[] = 'El Producto Seleccionado no Existe';
-        }
+            $this->error_matpri[] = 'Debe Seleccionar un Producto y la cantidad a producir. La cantidad debe ser entera';
+          }
 
-      }else{
-          $this->error[] = 'Debe Seleccionar un Producto y la cantidad a producir. La cantidad debe ser entera';
         }
-        
-      }
-
     }
+
+
+  }
 
   public function executeCreate(sfWebRequest $request)
   {
@@ -165,21 +211,21 @@ class ordenesActions extends autoOrdenesActions
 
     $ordpro = $request->getParameter('ord_pro');
     $producto = $ordpro['list_productos'];
-    $materia_prima = $ordpro['list_materia_prima'];
+    //$materia_prima = $ordpro['list_materia_prima'];
 
     if($producto[$fila]){
       $ordpro = Doctrine::getTable('Articomp')->findBy('compuesto', $producto[$fila]['artcomp']);
-      if($ordpro){
-        foreach($ordpro as $comp){
-          foreach ($materia_prima as $index => $matpri){
-            if($matpri['artcomp']==$comp->getCodigo()){
-              unset ($materia_prima[$index]);
-              break;
-            }
-          }
-        }
-        $materia_prima = array_values($materia_prima);
-      }
+//      if($ordpro){
+//        foreach($ordpro as $comp){
+//          foreach ($materia_prima as $index => $matpri){
+//            if($matpri['artcomp']==$comp->getCodigo()){
+//              unset ($materia_prima[$index]);
+//              break;
+//            }
+//          }
+//        }
+//        $materia_prima = array_values($materia_prima);
+//      }
       unset ($producto[$fila]);
       $producto = array_values($producto);
     }
@@ -187,7 +233,7 @@ class ordenesActions extends autoOrdenesActions
 
     // Generando variables para la vista
     $ordpro = new OrdPro();
-    $this->renderListsPost($request, &$ordpro, $producto, $materia_prima);
+    $this->renderListsPost($request, &$ordpro, $producto);
 
   }
 
@@ -197,8 +243,14 @@ class ordenesActions extends autoOrdenesActions
     $fila = $request->getParameter('row');
 
     $ordpro = $request->getParameter('ord_pro');
-    $producto = $ordpro['list_productos'];
-    $materia_prima = $ordpro['list_materia_prima'];
+    if(isset($ordpro['list_productos']))
+      $producto = $ordpro['list_productos'];
+    else $producto = array();
+
+    if(isset($ordpro['list_materia_prima']))
+      $materia_prima = $ordpro['list_materia_prima'];
+    else $materia_prima = array();
+
 
     unset ($materia_prima[$fila]);
     $materia_prima = array_values($materia_prima);

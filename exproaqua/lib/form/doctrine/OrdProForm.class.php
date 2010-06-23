@@ -41,6 +41,9 @@ class OrdProForm extends BaseOrdProForm
       'productos' => array(
         'considerNewFormEmptyFields' => array('artcomp', 'cantidad'),
       ),
+      'materia_prima' => array(
+        'considerNewFormEmptyFields' => array('artcomp', 'cantidad'),
+      ),
     ));
   }
 

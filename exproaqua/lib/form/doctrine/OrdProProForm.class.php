@@ -15,13 +15,18 @@ class OrdProProForm extends BaseOrdProProForm
   {
     parent::setup();
 
-    $query =  Doctrine_Query::create()
-                ->from('Articulo a')
-                ->innerJoin('a.Compuestos c');
+    $alm = Almconf::getConfig();
 
-//    $query = Doctrine_Core::getTable($this->getRelatedModelName('OrdenProduccion'))->createQuery()
-//                ->innerJoin('Compuestos');
-
+    if($alm){
+      $query =  Doctrine_Query::create()
+                  ->from('Articulo a')
+                  ->innerJoin('a.Existenc c')
+                  ->where('c.almacen = ?',$alm->getProTer()->getCodigo());
+    }else{
+      $query =  Doctrine_Query::create()
+                  ->from('Articulo a')
+                  ->where('a.codigo = ?','xxxxxxxxxxxxxxxx');
+    }
 
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
