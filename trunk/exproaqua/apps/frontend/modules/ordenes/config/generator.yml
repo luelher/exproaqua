@@ -48,4 +48,5 @@ generator:
           Orden: [numord, desord ]
           Selección Producto: [_new_productos ]
           Productos Requeridos: [_list_productos ]
+          Selección Materia Prima: [_new_materia_prima ]
           Artículos Requeridos: [_list_materia_prima ]

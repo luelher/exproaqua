@@ -25,4 +25,13 @@ class OrdPro extends BaseOrdPro
     if($this->anulada==1) return 'Sí';
     else return 'No';
   }
+
+  public function getEstaReportado()
+  {
+    //$ordpro
+    if($this->anulada==1) return 'Sí';
+    else return 'No';
+  }
+
+
 }

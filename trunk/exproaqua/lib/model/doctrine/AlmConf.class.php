@@ -12,4 +12,8 @@
  */
 class AlmConf extends BaseAlmConf
 {
+  public static function getConfig()
+  {
+    return Doctrine_Query::create()->from('AlmConf')->fetchOne(array());
+  }
 }

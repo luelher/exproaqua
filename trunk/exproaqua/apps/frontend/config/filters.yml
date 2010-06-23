@@ -7,5 +7,8 @@ remember_me:
 
 security:  ~
 
+siempreEnEspanol:
+  class: siempreEnEspanolFilter
+
 cache:     ~
 execution: ~

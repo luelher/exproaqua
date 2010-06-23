@@ -6,3 +6,7 @@ all:
   sf_guard_plugin:
     success_signin_url:      home/index
     success_signout_url:     home/index
+  premium:
+    empresa: 302269
+    sucursal: 001
+    

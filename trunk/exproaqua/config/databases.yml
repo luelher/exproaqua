@@ -2,6 +2,6 @@ all:
   premium:
     class: sfDoctrineDatabase
     param:
-      dsn: 'mysql://root:root@localhost/admin293617'
+      dsn: 'mysql://root:root@localhost/admin302269'
       username: root
       password: root

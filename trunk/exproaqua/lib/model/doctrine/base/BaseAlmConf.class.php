@@ -11,24 +11,30 @@ Doctrine_Manager::getInstance()->bindComponent('AlmConf', 'premium');
  * @property string $almmatpri
  * @property string $almpropro
  * @property string $almproter
- * @property Almacene $Almacene_1
- * @property Almacene $Almacene_2
- * @property Almacene $Almacene_3
+ * @property string $usuario
+ * @property Almacene $MatPri
+ * @property Almacene $ProPro
+ * @property Almacene $ProTer
+ * @property Usuarios $Usuarios
  * 
- * @method integer  getId()         Returns the current record's "id" value
- * @method string   getAlmmatpri()  Returns the current record's "almmatpri" value
- * @method string   getAlmpropro()  Returns the current record's "almpropro" value
- * @method string   getAlmproter()  Returns the current record's "almproter" value
- * @method Almacene getAlmacene1()  Returns the current record's "Almacene_1" value
- * @method Almacene getAlmacene2()  Returns the current record's "Almacene_2" value
- * @method Almacene getAlmacene3()  Returns the current record's "Almacene_3" value
- * @method AlmConf  setId()         Sets the current record's "id" value
- * @method AlmConf  setAlmmatpri()  Sets the current record's "almmatpri" value
- * @method AlmConf  setAlmpropro()  Sets the current record's "almpropro" value
- * @method AlmConf  setAlmproter()  Sets the current record's "almproter" value
- * @method AlmConf  setAlmacene1()  Sets the current record's "Almacene_1" value
- * @method AlmConf  setAlmacene2()  Sets the current record's "Almacene_2" value
- * @method AlmConf  setAlmacene3()  Sets the current record's "Almacene_3" value
+ * @method integer  getId()        Returns the current record's "id" value
+ * @method string   getAlmmatpri() Returns the current record's "almmatpri" value
+ * @method string   getAlmpropro() Returns the current record's "almpropro" value
+ * @method string   getAlmproter() Returns the current record's "almproter" value
+ * @method string   getUsuario()   Returns the current record's "usuario" value
+ * @method Almacene getMatPri()    Returns the current record's "MatPri" value
+ * @method Almacene getProPro()    Returns the current record's "ProPro" value
+ * @method Almacene getProTer()    Returns the current record's "ProTer" value
+ * @method Usuarios getUsuarios()  Returns the current record's "Usuarios" value
+ * @method AlmConf  setId()        Sets the current record's "id" value
+ * @method AlmConf  setAlmmatpri() Sets the current record's "almmatpri" value
+ * @method AlmConf  setAlmpropro() Sets the current record's "almpropro" value
+ * @method AlmConf  setAlmproter() Sets the current record's "almproter" value
+ * @method AlmConf  setUsuario()   Sets the current record's "usuario" value
+ * @method AlmConf  setMatPri()    Sets the current record's "MatPri" value
+ * @method AlmConf  setProPro()    Sets the current record's "ProPro" value
+ * @method AlmConf  setProTer()    Sets the current record's "ProTer" value
+ * @method AlmConf  setUsuarios()  Sets the current record's "Usuarios" value
  * 
  * @package    exproaqua
  * @subpackage model
@@ -61,22 +67,31 @@ abstract class BaseAlmConf extends sfDoctrineRecord
              'notnull' => true,
              'length' => '2',
              ));
+        $this->hasColumn('usuario', 'string', 20, array(
+             'type' => 'string',
+             'notnull' => true,
+             'length' => '20',
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Almacene as Almacene_1', array(
+        $this->hasOne('Almacene as MatPri', array(
              'local' => 'almmatpri',
              'foreign' => 'codigo'));
 
-        $this->hasOne('Almacene as Almacene_2', array(
+        $this->hasOne('Almacene as ProPro', array(
              'local' => 'almpropro',
              'foreign' => 'codigo'));
 
-        $this->hasOne('Almacene as Almacene_3', array(
+        $this->hasOne('Almacene as ProTer', array(
              'local' => 'almproter',
              'foreign' => 'codigo'));
+
+        $this->hasOne('Usuarios', array(
+             'local' => 'usuario',
+             'foreign' => 'username'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);
