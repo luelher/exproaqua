@@ -11,15 +11,18 @@ Doctrine_Manager::getInstance()->bindComponent('Tipoentradasalida', 'premium');
  * @property string $agencia
  * @property string $codigo
  * @property string $nombre
+ * @property Doctrine_Collection $AlmConf
  * 
- * @method string            getIdEmpresa()  Returns the current record's "id_empresa" value
- * @method string            getAgencia()    Returns the current record's "agencia" value
- * @method string            getCodigo()     Returns the current record's "codigo" value
- * @method string            getNombre()     Returns the current record's "nombre" value
- * @method Tipoentradasalida setIdEmpresa()  Sets the current record's "id_empresa" value
- * @method Tipoentradasalida setAgencia()    Sets the current record's "agencia" value
- * @method Tipoentradasalida setCodigo()     Sets the current record's "codigo" value
- * @method Tipoentradasalida setNombre()     Sets the current record's "nombre" value
+ * @method string              getIdEmpresa()  Returns the current record's "id_empresa" value
+ * @method string              getAgencia()    Returns the current record's "agencia" value
+ * @method string              getCodigo()     Returns the current record's "codigo" value
+ * @method string              getNombre()     Returns the current record's "nombre" value
+ * @method Doctrine_Collection getAlmConf()    Returns the current record's "AlmConf" collection
+ * @method Tipoentradasalida   setIdEmpresa()  Sets the current record's "id_empresa" value
+ * @method Tipoentradasalida   setAgencia()    Sets the current record's "agencia" value
+ * @method Tipoentradasalida   setCodigo()     Sets the current record's "codigo" value
+ * @method Tipoentradasalida   setNombre()     Sets the current record's "nombre" value
+ * @method Tipoentradasalida   setAlmConf()    Sets the current record's "AlmConf" collection
  * 
  * @package    exproaqua
  * @subpackage model
@@ -72,6 +75,8 @@ abstract class BaseTipoentradasalida extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasMany('AlmConf', array(
+             'local' => 'codigo',
+             'foreign' => 'tipent'));
     }
 }

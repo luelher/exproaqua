@@ -4154,6 +4154,12 @@ Cargoenc:
       default: ' '
       notnull: false
       autoincrement: false
+  relations:
+    Detalles:
+      class: Cargodet
+      local: documento
+      foreign: documento
+      type: many
 Cfgrep:
   connection: premium
   tableName: cfgrep
@@ -15309,15 +15315,11 @@ Kardex:
   connection: premium
   tableName: kardex
   columns:
-    id:
-      type: integer(8)
-      autoincrement: true
-      primary: true
     id_empresa:
       type: string(6)
       fixed: false
       unsigned: false
-      primary: false
+      primary: true
       notnull: true
       autoincrement: false
     agencia:

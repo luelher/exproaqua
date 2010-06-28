@@ -19,6 +19,8 @@ abstract class BaseOrdProForm extends BaseFormDoctrine
       'numord'     => new sfWidgetFormInputText(),
       'desord'     => new sfWidgetFormInputText(),
       'fecord'     => new sfWidgetFormDateTime(),
+      'documento' => new sfWidgetFormInputText(),
+      'documentopro' => new sfWidgetFormInputText(),
       'anulada'    => new sfWidgetFormInputCheckbox(),
       'fecanu'     => new sfWidgetFormDateTime(),
       'reportada'  => new sfWidgetFormInputCheckbox(),

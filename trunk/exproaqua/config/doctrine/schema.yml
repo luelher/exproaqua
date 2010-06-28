@@ -20,6 +20,15 @@ AlmConf:
     usuario:
       type: string(20)
       notnull: true
+    condoc:
+      type: integer(4)
+      primary: false
+    tipent:
+      type: string(6)
+      notnull: true
+    tipsal:
+      type: string(6)
+      notnull: true
   relations:
     MatPri:
       class: Almacene
@@ -37,6 +46,14 @@ AlmConf:
       class: Usuarios
       local: usuario
       foreign: username
+    TipoEntrada:
+      class: Tipoentradasalida
+      local: tipent
+      foreign: codigo
+    TipoSalida:
+      class: Tipoentradasalida
+      local: tipsal
+      foreign: codigo
 
 OrdPro:
   tableName: ordpro
@@ -68,6 +85,12 @@ OrdPro:
     fecrep:
       type: timestamp
       notnull: false
+    documento:
+      type: string(10)
+      notnull: false
+    documentopro:
+      type: string(10)
+      notnull: false
   indexes:
     numord_idx:
       fields: [numord]
@@ -86,6 +109,16 @@ OrdPro:
       foreign: ordpro_id
       type: many
       onDelete: CASCADE
+    docmatpri:
+      class: Cargoenc
+      local: documento
+      foreign: documento
+      type: one
+    docpro:
+      class: Cargoenc
+      local: documentopro
+      foreign: documento
+      type: one
 
 OrdProPro:
   tableName: ordpropro
