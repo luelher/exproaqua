@@ -20,6 +20,9 @@ abstract class BaseAlmConfForm extends BaseFormDoctrine
       'almpropro'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ProPro'), 'add_empty' => false)),
       'almproter'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ProTer'), 'add_empty' => false)),
       'usuario'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Usuarios'), 'add_empty' => false)),
+      'condoc'     => new sfWidgetFormInputText(),
+      'tipent'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TipoEntrada'), 'add_empty' => false)),
+      'tipsal'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TipoSalida'), 'add_empty' => false)),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -30,6 +33,9 @@ abstract class BaseAlmConfForm extends BaseFormDoctrine
       'almpropro'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ProPro'))),
       'almproter'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ProTer'))),
       'usuario'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Usuarios'))),
+      'condoc'     => new sfValidatorInteger(array('required' => false)),
+      'tipent'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TipoEntrada'))),
+      'tipsal'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TipoSalida'))),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));

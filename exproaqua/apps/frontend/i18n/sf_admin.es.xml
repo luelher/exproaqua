@@ -169,6 +169,10 @@
         <source><![CDATA[from %from_date%<br />to %to_date%]]></source>
         <target><![CDATA[de %from_date%<br />a %to_date%]]></target>
       </trans-unit>
+      <trans-unit>
+        <source>The item was annuled successfully.</source>
+        <target>El elemento se ha anulado correctamente.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

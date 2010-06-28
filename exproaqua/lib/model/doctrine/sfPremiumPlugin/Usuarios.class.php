@@ -12,4 +12,7 @@
  */
 class Usuarios extends PluginUsuarios
 {
+  public function __toString() {
+    return $this->getUsername().' - '.$this->getNombre();
+  }
 }

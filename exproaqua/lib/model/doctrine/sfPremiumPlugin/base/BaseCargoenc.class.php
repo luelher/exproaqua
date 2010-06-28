@@ -20,33 +20,39 @@ Doctrine_Manager::getInstance()->bindComponent('Cargoenc', 'premium');
  * @property date $fecha
  * @property string $estacion
  * @property string $tipoentradasalida
+ * @property Doctrine_Collection $Detalles
+ * @property Doctrine_Collection $OrdPro
  * 
- * @method string   getIdEmpresa()         Returns the current record's "id_empresa" value
- * @method string   getAgencia()           Returns the current record's "agencia" value
- * @method string   getDocumento()         Returns the current record's "documento" value
- * @method string   getOrdentrab()         Returns the current record's "ordentrab" value
- * @method string   getRequisicio()        Returns the current record's "requisicio" value
- * @method float    getCargado()           Returns the current record's "cargado" value
- * @method float    getStatus()            Returns the current record's "status" value
- * @method string   getRealizador()        Returns the current record's "realizador" value
- * @method string   getEmisor()            Returns the current record's "emisor" value
- * @method string   getMotivo()            Returns the current record's "motivo" value
- * @method date     getFecha()             Returns the current record's "fecha" value
- * @method string   getEstacion()          Returns the current record's "estacion" value
- * @method string   getTipoentradasalida() Returns the current record's "tipoentradasalida" value
- * @method Cargoenc setIdEmpresa()         Sets the current record's "id_empresa" value
- * @method Cargoenc setAgencia()           Sets the current record's "agencia" value
- * @method Cargoenc setDocumento()         Sets the current record's "documento" value
- * @method Cargoenc setOrdentrab()         Sets the current record's "ordentrab" value
- * @method Cargoenc setRequisicio()        Sets the current record's "requisicio" value
- * @method Cargoenc setCargado()           Sets the current record's "cargado" value
- * @method Cargoenc setStatus()            Sets the current record's "status" value
- * @method Cargoenc setRealizador()        Sets the current record's "realizador" value
- * @method Cargoenc setEmisor()            Sets the current record's "emisor" value
- * @method Cargoenc setMotivo()            Sets the current record's "motivo" value
- * @method Cargoenc setFecha()             Sets the current record's "fecha" value
- * @method Cargoenc setEstacion()          Sets the current record's "estacion" value
- * @method Cargoenc setTipoentradasalida() Sets the current record's "tipoentradasalida" value
+ * @method string              getIdEmpresa()         Returns the current record's "id_empresa" value
+ * @method string              getAgencia()           Returns the current record's "agencia" value
+ * @method string              getDocumento()         Returns the current record's "documento" value
+ * @method string              getOrdentrab()         Returns the current record's "ordentrab" value
+ * @method string              getRequisicio()        Returns the current record's "requisicio" value
+ * @method float               getCargado()           Returns the current record's "cargado" value
+ * @method float               getStatus()            Returns the current record's "status" value
+ * @method string              getRealizador()        Returns the current record's "realizador" value
+ * @method string              getEmisor()            Returns the current record's "emisor" value
+ * @method string              getMotivo()            Returns the current record's "motivo" value
+ * @method date                getFecha()             Returns the current record's "fecha" value
+ * @method string              getEstacion()          Returns the current record's "estacion" value
+ * @method string              getTipoentradasalida() Returns the current record's "tipoentradasalida" value
+ * @method Doctrine_Collection getDetalles()          Returns the current record's "Detalles" collection
+ * @method Doctrine_Collection getOrdPro()            Returns the current record's "OrdPro" collection
+ * @method Cargoenc            setIdEmpresa()         Sets the current record's "id_empresa" value
+ * @method Cargoenc            setAgencia()           Sets the current record's "agencia" value
+ * @method Cargoenc            setDocumento()         Sets the current record's "documento" value
+ * @method Cargoenc            setOrdentrab()         Sets the current record's "ordentrab" value
+ * @method Cargoenc            setRequisicio()        Sets the current record's "requisicio" value
+ * @method Cargoenc            setCargado()           Sets the current record's "cargado" value
+ * @method Cargoenc            setStatus()            Sets the current record's "status" value
+ * @method Cargoenc            setRealizador()        Sets the current record's "realizador" value
+ * @method Cargoenc            setEmisor()            Sets the current record's "emisor" value
+ * @method Cargoenc            setMotivo()            Sets the current record's "motivo" value
+ * @method Cargoenc            setFecha()             Sets the current record's "fecha" value
+ * @method Cargoenc            setEstacion()          Sets the current record's "estacion" value
+ * @method Cargoenc            setTipoentradasalida() Sets the current record's "tipoentradasalida" value
+ * @method Cargoenc            setDetalles()          Sets the current record's "Detalles" collection
+ * @method Cargoenc            setOrdPro()            Sets the current record's "OrdPro" collection
  * 
  * @package    exproaqua
  * @subpackage model
@@ -190,6 +196,12 @@ abstract class BaseCargoenc extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasMany('Cargodet as Detalles', array(
+             'local' => 'documento',
+             'foreign' => 'documento'));
+
+        $this->hasMany('OrdPro', array(
+             'local' => 'documento',
+             'foreign' => 'documento'));
     }
 }

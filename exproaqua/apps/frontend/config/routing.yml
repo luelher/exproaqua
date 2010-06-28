@@ -1,3 +1,12 @@
+ord_pro_informenes:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                OrdPro
+    module:               informenes
+    prefix_path:          /informenes
+    column:               id
+    with_wildcard_routes: true
+
 ord_pro_reportes:
   class: sfDoctrineRouteCollection
   options:

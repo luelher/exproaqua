@@ -13,6 +13,6 @@
 class Articulo extends PluginArticulo
 {
   public function __toString() {
-    return $this->codigo.' - '.$this->nombre;
+    return $this->codigo.' - '.$this->nombre.' ('.number_format($this->existencia, 2,',','.').')';
   }
 }

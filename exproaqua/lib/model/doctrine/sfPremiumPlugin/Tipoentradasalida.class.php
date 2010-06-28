@@ -12,4 +12,7 @@
  */
 class Tipoentradasalida extends PluginTipoentradasalida
 {
+  public function __toString() {
+    return $this->nombre;
+  }
 }

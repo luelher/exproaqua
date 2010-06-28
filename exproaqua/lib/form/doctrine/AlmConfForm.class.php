@@ -19,6 +19,10 @@ class AlmConfForm extends BaseAlmConfForm
       'almmatpri'  => new sfValidatorDoctrineChoice(array('model' => 'Almacene', 'column' => 'codigo', 'required' => true)),
       'almpropro'  => new sfValidatorDoctrineChoice(array('model' => 'Almacene', 'column' => 'codigo', 'required' => true)),
       'almproter'  => new sfValidatorDoctrineChoice(array('model' => 'Almacene', 'column' => 'codigo', 'required' => true)),
+      'usuario'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Usuarios'))),
+      'condoc'     => new sfValidatorInteger(array('required' => false)),
+      'tipent'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TipoEntrada'))),
+      'tipsal'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TipoSalida'))),
     ));
 
   }

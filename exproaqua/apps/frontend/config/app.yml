@@ -7,6 +7,5 @@ all:
     success_signin_url:      home/index
     success_signout_url:     home/index
   premium:
-    empresa: 302269
-    sucursal: 001
-    
+    empresa: '302269'
+    sucursal: '001'

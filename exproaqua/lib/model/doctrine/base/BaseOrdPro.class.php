@@ -15,8 +15,12 @@ Doctrine_Manager::getInstance()->bindComponent('OrdPro', 'premium');
  * @property timestamp $fecanu
  * @property boolean $reportada
  * @property timestamp $fecrep
+ * @property string $documento
+ * @property string $documentopro
  * @property Doctrine_Collection $productos
  * @property Doctrine_Collection $materia_prima
+ * @property Cargoenc $docmatpri
+ * @property Cargoenc $docpro
  * 
  * @method integer             getId()            Returns the current record's "id" value
  * @method integer             getNumord()        Returns the current record's "numord" value
@@ -26,8 +30,12 @@ Doctrine_Manager::getInstance()->bindComponent('OrdPro', 'premium');
  * @method timestamp           getFecanu()        Returns the current record's "fecanu" value
  * @method boolean             getReportada()     Returns the current record's "reportada" value
  * @method timestamp           getFecrep()        Returns the current record's "fecrep" value
+ * @method string              getDocumento()     Returns the current record's "documento" value
+ * @method string              getDocumentopro()  Returns the current record's "documentopro" value
  * @method Doctrine_Collection getProductos()     Returns the current record's "productos" collection
  * @method Doctrine_Collection getMateriaPrima()  Returns the current record's "materia_prima" collection
+ * @method Cargoenc            getDocmatpri()     Returns the current record's "docmatpri" value
+ * @method Cargoenc            getDocpro()        Returns the current record's "docpro" value
  * @method OrdPro              setId()            Sets the current record's "id" value
  * @method OrdPro              setNumord()        Sets the current record's "numord" value
  * @method OrdPro              setDesord()        Sets the current record's "desord" value
@@ -36,8 +44,12 @@ Doctrine_Manager::getInstance()->bindComponent('OrdPro', 'premium');
  * @method OrdPro              setFecanu()        Sets the current record's "fecanu" value
  * @method OrdPro              setReportada()     Sets the current record's "reportada" value
  * @method OrdPro              setFecrep()        Sets the current record's "fecrep" value
+ * @method OrdPro              setDocumento()     Sets the current record's "documento" value
+ * @method OrdPro              setDocumentopro()  Sets the current record's "documentopro" value
  * @method OrdPro              setProductos()     Sets the current record's "productos" collection
  * @method OrdPro              setMateriaPrima()  Sets the current record's "materia_prima" collection
+ * @method OrdPro              setDocmatpri()     Sets the current record's "docmatpri" value
+ * @method OrdPro              setDocpro()        Sets the current record's "docpro" value
  * 
  * @package    exproaqua
  * @subpackage model
@@ -86,6 +98,16 @@ abstract class BaseOrdPro extends sfDoctrineRecord
              'type' => 'timestamp',
              'notnull' => false,
              ));
+        $this->hasColumn('documento', 'string', 10, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => '10',
+             ));
+        $this->hasColumn('documentopro', 'string', 10, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => '10',
+             ));
 
 
         $this->index('numord_idx', array(
@@ -114,6 +136,14 @@ abstract class BaseOrdPro extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'ordpro_id',
              'onDelete' => 'CASCADE'));
+
+        $this->hasOne('Cargoenc as docmatpri', array(
+             'local' => 'documento',
+             'foreign' => 'documento'));
+
+        $this->hasOne('Cargoenc as docpro', array(
+             'local' => 'documentopro',
+             'foreign' => 'documento'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);
