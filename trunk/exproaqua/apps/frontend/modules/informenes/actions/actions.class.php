@@ -23,24 +23,18 @@ class informenesActions extends autoInformenesActions
     $config = sfTCPDFPluginConfigHandler::loadConfig();
 
     // pdf object
-    $pdf = new sfTCPDF();
+    $pdf = new PDFInforme();
 
     // settings
-    $pdf->SetFont('FreeSerif', '', 12);
+    //$pdf->SetFont('FreeSerif', '', 12);
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
     $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, PDF_AUTHOR );
     $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-    // init pdf doc
-    $pdf->AliasNbPages();
-    $pdf->AddPage();
-    $pdf->Ln();
-    $pdf->Ln();
-    $pdf->Cell(40,20,'Hola Mundo');
-
+    $pdf->Body($request->getParameter('id'));
     // output
     $pdf->Output();
 
