@@ -18,17 +18,17 @@ default:
 
   # Other parameters  ##########################################################
   # page format
-  PDF_PAGE_FORMAT: "Letter"
+  PDF_PAGE_FORMAT: "A4"
   # page orientation (P=portrait, L=landscape)
   PDF_PAGE_ORIENTATION: "P"
   # document creator
   PDF_CREATOR: "TCPDF"
   # document author
-  PDF_AUTHOR: "Luis Hernández"
+  PDF_AUTHOR: "Exproaqua C.A."
   # header title
-  PDF_HEADER_TITLE: "Exproaqua"
+  PDF_HEADER_TITLE: "Informe de Producción"
   # header description string
-  PDF_HEADER_STRING: "Informe de Producción"
+  PDF_HEADER_STRING: "Direccion Exproaqua, Telefonos XXXX-XXXXXXX / YYYY-YYYYYYY"
   # image logo
   PDF_HEADER_LOGO: "logo.jpg"
   # header logo image width [mm]
