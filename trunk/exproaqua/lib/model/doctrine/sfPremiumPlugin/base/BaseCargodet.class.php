@@ -38,6 +38,7 @@ Doctrine_Manager::getInstance()->bindComponent('Cargodet', 'premium');
  * @property float $costopromfecha
  * @property float $factor
  * @property float $tipo
+ * @property Cargoenc $Cargoenc
  * 
  * @method string   getIdEmpresa()      Returns the current record's "id_empresa" value
  * @method string   getAgencia()        Returns the current record's "agencia" value
@@ -70,6 +71,7 @@ Doctrine_Manager::getInstance()->bindComponent('Cargodet', 'premium');
  * @method float    getCostopromfecha() Returns the current record's "costopromfecha" value
  * @method float    getFactor()         Returns the current record's "factor" value
  * @method float    getTipo()           Returns the current record's "tipo" value
+ * @method Cargoenc getCargoenc()       Returns the current record's "Cargoenc" value
  * @method Cargodet setIdEmpresa()      Sets the current record's "id_empresa" value
  * @method Cargodet setAgencia()        Sets the current record's "agencia" value
  * @method Cargodet setDocumento()      Sets the current record's "documento" value
@@ -101,6 +103,7 @@ Doctrine_Manager::getInstance()->bindComponent('Cargodet', 'premium');
  * @method Cargodet setCostopromfecha() Sets the current record's "costopromfecha" value
  * @method Cargodet setFactor()         Sets the current record's "factor" value
  * @method Cargodet setTipo()           Sets the current record's "tipo" value
+ * @method Cargodet setCargoenc()       Sets the current record's "Cargoenc" value
  * 
  * @package    exproaqua
  * @subpackage model
@@ -418,6 +421,8 @@ abstract class BaseCargodet extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Cargoenc', array(
+             'local' => 'documento',
+             'foreign' => 'documento'));
     }
 }
