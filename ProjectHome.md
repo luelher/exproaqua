@@ -1,0 +1,1 @@
+Aplicacion para la gestión de almacenes de produccion para la empresa Exproaqua. Esta aplicacion contiene comunicacion directa con el sistema adminsitrativo Premium para gestionar la entradas y salidas de los diferentes almacenes (materia prima, producto en proceso y producto terminado)
